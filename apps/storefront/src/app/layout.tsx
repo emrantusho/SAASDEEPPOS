@@ -3,15 +3,30 @@ import { GeistSans } from "geist/font/sans";
 import { CartProvider } from "@/components/cart/cart-context";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { DriveFetcher } from "@/lib/drive-fetcher";
-import type { ProductsManifest } from "@saasdeep/shared";
+import { LocaleProvider } from "@/lib/use-locale";
+import { getStoreSettings } from "@/lib/store-api";
+import { Toaster } from "sonner";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Saasdeep Softwares Store",
-  description: "Saasdeep Softwares - Open-source e-commerce",
-  icons: { icon: "/favicon.svg" },
-};
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const settings = await getStoreSettings();
+    return {
+      title: settings.store_name || "Store",
+      description: settings.store_description || "Online store",
+      icons: settings.favicon_url ? { icon: settings.favicon_url } : undefined,
+      manifest: "/manifest.json",
+    };
+  } catch {
+    return {
+      title: "Store",
+      description: "Online store",
+      manifest: "/manifest.json",
+    };
+  }
+}
 
 function getContrastColor(hex: string): string {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -35,33 +50,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   let fg = "#09090b";
   let accent = "#3b82f6";
   let fontFamily = "system-ui, sans-serif";
-  let heroTitle = "Saasdeep Softwares Store";
-  let heroSubtitle = "Open-source e-commerce powered by Saasdeep Softwares";
   let logoUrl = "";
-  let faviconUrl = "";
-  let storeName = "Saasdeep Softwares";
-  let footerText = "Saasdeep Softwares. All rights reserved.";
+  let storeName = "Store";
+  let footerText = "All rights reserved.";
+  let locale = "bn";
+  let currency = "BDT";
 
   try {
-    const fetcher = new DriveFetcher();
-    const manifest: ProductsManifest | null = await fetcher.fetchManifest();
-    if (manifest?.theme) {
-      const t = manifest.theme;
-      if (t.primaryColor) primary = t.primaryColor;
-      if (t.secondaryColor) secondary = t.secondaryColor;
-      if (t.backgroundColor) bg = t.backgroundColor;
-      if (t.textColor) fg = t.textColor;
-      if (t.accentColor) accent = t.accentColor;
-      if (t.fontFamily) fontFamily = t.fontFamily;
-      if (t.heroTitle) heroTitle = t.heroTitle;
-      if (t.heroSubtitle) heroSubtitle = t.heroSubtitle;
-      if (t.logoUrl) logoUrl = t.logoUrl;
-      if (t.faviconUrl) faviconUrl = t.faviconUrl;
-      if (t.footerText) footerText = t.footerText;
-    }
-    if (manifest?.storeName) storeName = manifest.storeName;
+    const settings = await getStoreSettings();
+    if (settings.primary_color) primary = settings.primary_color;
+    if (settings.secondary_color) secondary = settings.secondary_color;
+    if (settings.background_color) bg = settings.background_color;
+    if (settings.text_color) fg = settings.text_color;
+    if (settings.accent_color) accent = settings.accent_color;
+    if (settings.font_family) fontFamily = settings.font_family;
+    if (settings.logo_url) logoUrl = settings.logo_url;
+    if (settings.store_name) storeName = settings.store_name;
+    if (settings.footer_text) footerText = settings.footer_text;
+    if (settings.locale) locale = settings.locale;
+    if (settings.currency) currency = settings.currency;
   } catch (err) {
-    console.error("Failed to load theme:", err);
+    console.error("Failed to load store settings:", err);
   }
 
   const themeVars = {
@@ -79,22 +88,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     fontFamily,
   } as React.CSSProperties;
 
-  const clientTheme = JSON.stringify({ logoUrl, storeName, faviconUrl, footerText });
-
   return (
-    <html lang="en" className={GeistSans.className} style={themeVars}>
-      <head>
-        {faviconUrl && <link rel="icon" href={faviconUrl} />}
-        <script dangerouslySetInnerHTML={{
-          __html: `try{localStorage.setItem("storefront_theme",${clientTheme})}catch(e){}`
-        }} />
-      </head>
+    <html lang={locale} className={GeistSans.className} style={themeVars}>
       <body className="min-h-screen bg-background text-foreground antialiased flex flex-col">
-        <CartProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </CartProvider>
+        <LocaleProvider locale={locale}>
+          <CartProvider currency={currency}>
+            <Navbar logoUrl={logoUrl} storeName={storeName} />
+            <main className="flex-1">{children}</main>
+            <Footer storeName={storeName} footerText={footerText} />
+            <Toaster position="top-right" richColors />
+          </CartProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

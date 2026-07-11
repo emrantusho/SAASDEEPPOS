@@ -4,34 +4,41 @@ import { useCart } from "@/components/cart/cart-context";
 import { useState } from "react";
 import Link from "next/link";
 import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
+import { formatPrice } from "@/lib/currency";
+import { useT } from "@/lib/use-locale";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { submitOrderAndSync } from "@/lib/checkout";
 
 export default function CartPage() {
-  const { cart, updateQuantity, removeItem, clearCart } = useCart();
-  const [checkoutMethod, setCheckoutMethod] = useState("cash");
+  const { cart, itemCount, total, updateQuantity, removeItem, clearCart, checkout } = useCart();
+  const t = useT();
+  const router = useRouter();
+  const [checkoutMethod, setCheckoutMethod] = useState("bkash");
+  const [customerName, setCustomerName] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [orderType, setOrderType] = useState("delivery");
   const [processing, setProcessing] = useState(false);
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const [currency, setCurrency] = useState("BDT");
 
   const handleCheckout = async () => {
     if (cart.length === 0) return;
+    if (!customerPhone) {
+      toast.error("Please enter your phone number");
+      return;
+    }
     setProcessing(true);
     try {
-      const result = await submitOrderAndSync({
-        items: cart,
-        total,
-        currency: "USD",
+      const result = await checkout({
         paymentMethod: checkoutMethod,
+        customerName,
+        customerPhone,
+        orderType,
+        deliveryAddress: orderType === "delivery" ? deliveryAddress : undefined,
       });
-      if (result.success) {
-        clearCart();
-        toast.success("Order placed successfully!");
-      } else {
-        toast.error(result.error || "Checkout failed");
+      if (result.success && result.orderId) {
+        router.push(`/order/${result.orderId}`);
       }
-    } catch (err) {
-      toast.error("Checkout failed: " + (err as Error).message);
     } finally {
       setProcessing(false);
     }
@@ -41,13 +48,13 @@ export default function CartPage() {
     return (
       <div className="mx-auto max-w-7xl px-4 py-16 text-center">
         <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-        <h1 className="text-2xl font-bold text-foreground mb-2">Your cart is empty</h1>
-        <p className="text-muted-foreground mb-6">Add some products to get started.</p>
+        <h1 className="text-2xl font-bold text-foreground mb-2">{t.cart.empty}</h1>
+        <p className="text-muted-foreground mb-6">{t.cart.emptyDesc}</p>
         <Link
           href="/search"
           className="inline-flex items-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90"
         >
-          Browse Products
+          {t.cart.browseProducts}
         </Link>
       </div>
     );
@@ -56,9 +63,9 @@ export default function CartPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold text-foreground">Shopping Cart</h1>
+        <h1 className="text-2xl font-bold text-foreground">{t.cart.title}</h1>
         <button onClick={clearCart} className="text-sm text-muted-foreground hover:text-foreground">
-          Clear All
+          {t.cart.clearAll}
         </button>
       </div>
 
@@ -73,7 +80,7 @@ export default function CartPage() {
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-medium text-foreground truncate">{item.title}</h3>
               <p className="text-sm text-primary font-semibold">
-                {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.price)}
+                {formatPrice(item.price, currency)}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -103,24 +110,85 @@ export default function CartPage() {
 
       <div className="mt-8 rounded-xl border border-border bg-card p-6">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-lg font-bold text-foreground">Total</span>
+          <span className="text-lg font-bold text-foreground">{t.cart.total}</span>
           <span className="text-2xl font-bold text-primary">
-            {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(total)}
+            {formatPrice(total, currency)}
           </span>
         </div>
 
-        <div className="mb-4">
-          <label className="text-sm font-medium text-foreground block mb-2">Payment Method</label>
-          <select
-            value={checkoutMethod}
-            onChange={(e) => setCheckoutMethod(e.target.value)}
-            className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
-          >
-            <option value="cash">Cash on Delivery</option>
-            <option value="stripe">Credit/Debit Card (Stripe)</option>
-            <option value="transfer">Bank Transfer</option>
-            <option value="paypal">PayPal</option>
-          </select>
+        <div className="space-y-4 mb-4">
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-1">Phone Number *</label>
+            <input
+              type="tel"
+              value={customerPhone}
+              onChange={(e) => setCustomerPhone(e.target.value)}
+              placeholder="01XXXXXXXXX"
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-1">Name</label>
+            <input
+              type="text"
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              placeholder="Your name"
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-1">Order Type</label>
+            <select
+              value={orderType}
+              onChange={(e) => setOrderType(e.target.value)}
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+            >
+              <option value="delivery">Delivery</option>
+              <option value="pickup">Pickup</option>
+              <option value="dine-in">Dine In</option>
+            </select>
+          </div>
+
+          {orderType === "delivery" && (
+            <div>
+              <label className="text-sm font-medium text-foreground block mb-1">Delivery Address</label>
+              <textarea
+                value={deliveryAddress}
+                onChange={(e) => setDeliveryAddress(e.target.value)}
+                placeholder="Your full address"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+                rows={2}
+              />
+            </div>
+          )}
+
+          <div>
+            <label className="text-sm font-medium text-foreground block mb-2">{t.cart.paymentMethod}</label>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { id: "bkash", label: "bKash" },
+                { id: "nagad", label: "Nagad" },
+                { id: "cash", label: "Cash" },
+                { id: "card", label: "Card" },
+              ].map((method) => (
+                <button
+                  key={method.id}
+                  onClick={() => setCheckoutMethod(method.id)}
+                  className={`px-3 py-2 rounded-lg border text-sm font-medium transition-colors ${
+                    checkoutMethod === method.id
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-background text-foreground border-border hover:bg-muted"
+                  }`}
+                >
+                  {method.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         <button
@@ -128,7 +196,7 @@ export default function CartPage() {
           disabled={processing}
           className="w-full rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:opacity-90 disabled:opacity-50"
         >
-          {processing ? "Processing..." : "Place Order"}
+          {processing ? t.cart.processing : t.cart.placeOrder}
         </button>
       </div>
     </div>

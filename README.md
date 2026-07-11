@@ -381,11 +381,15 @@ erDiagram
     products {
         serial id PK
         varchar name
+        varchar slug
         text description
         integer price
         integer in_stock
         varchar user_uid
         varchar category
+        jsonb images
+        boolean featured
+        boolean active
         varchar ncm
         varchar cfop
         varchar icms_cst
@@ -417,6 +421,12 @@ erDiagram
         integer total_amount
         varchar user_uid
         varchar status
+        varchar order_type
+        varchar customer_phone
+        varchar customer_name
+        varchar table_number
+        text delivery_address
+        text notes
         timestamp created_at
     }
 

@@ -6,6 +6,7 @@ import {
   integer,
   timestamp,
   boolean,
+  jsonb,
   customType,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -32,11 +33,15 @@ const bytea = customType<{ data: Buffer; driverData: Buffer }>({
 export const products = pgTable("products", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }),
   description: text("description"),
   price: integer("price").notNull(),
   in_stock: integer("in_stock").notNull(),
   user_uid: varchar("user_uid", { length: 255 }).notNull(),
   category: varchar("category", { length: 50 }),
+  images: jsonb("images").default([]),
+  featured: boolean("featured").default(false),
+  active: boolean("active").default(true),
   // Fiscal fields (optional, fallback to fiscal_settings defaults)
   ncm: varchar("ncm", { length: 8 }),
   cfop: varchar("cfop", { length: 4 }),
@@ -65,6 +70,12 @@ export const orders = pgTable("orders", {
   total_amount: integer("total_amount").notNull(),
   user_uid: varchar("user_uid", { length: 255 }).notNull(),
   status: varchar("status", { length: 20 }),
+  order_type: varchar("order_type", { length: 20 }).default("delivery"),
+  customer_phone: varchar("customer_phone", { length: 20 }),
+  customer_name: varchar("customer_name", { length: 255 }),
+  table_number: varchar("table_number", { length: 10 }),
+  delivery_address: text("delivery_address"),
+  notes: text("notes"),
   created_at: timestamp("created_at").defaultNow(),
 });
 
@@ -97,6 +108,41 @@ export const transactions = pgTable("transactions", {
   category: varchar("category", { length: 100 }),
   status: varchar("status", { length: 20 }),
   created_at: timestamp("created_at").defaultNow(),
+});
+
+// ── Categories ─────────────────────────────────────────────────────────────
+export const categories = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  slug: varchar("slug", { length: 100 }).notNull(),
+  user_uid: varchar("user_uid", { length: 255 }).notNull(),
+  image_url: text("image_url"),
+  sort_order: integer("sort_order").default(0),
+  created_at: timestamp("created_at").defaultNow(),
+});
+
+// ── Store Settings ─────────────────────────────────────────────────────────
+export const storeSettings = pgTable("store_settings", {
+  id: serial("id").primaryKey(),
+  user_uid: varchar("user_uid", { length: 255 }).notNull().unique(),
+  store_name: varchar("store_name", { length: 255 }),
+  store_description: text("store_description"),
+  logo_url: text("logo_url"),
+  favicon_url: text("favicon_url"),
+  footer_text: text("footer_text"),
+  primary_color: varchar("primary_color", { length: 7 }).default("#18181b"),
+  secondary_color: varchar("secondary_color", { length: 7 }).default("#f4f4f5"),
+  background_color: varchar("background_color", { length: 7 }).default("#ffffff"),
+  text_color: varchar("text_color", { length: 7 }).default("#09090b"),
+  accent_color: varchar("accent_color", { length: 7 }).default("#3b82f6"),
+  font_family: varchar("font_family", { length: 100 }).default("system-ui, sans-serif"),
+  currency: varchar("currency", { length: 3 }).default("BDT"),
+  locale: varchar("locale", { length: 10 }).default("bn"),
+  payment_methods: jsonb("payment_methods").default(["cash", "bkash", "nagad"]),
+  delivery_fee: integer("delivery_fee").default(0),
+  free_delivery_min: integer("free_delivery_min").default(0),
+  created_at: timestamp("created_at").defaultNow(),
+  updated_at: timestamp("updated_at").defaultNow(),
 });
 
 // ── Cities (IBGE) ──────────────────────────────────────────────────────────
@@ -260,6 +306,10 @@ export const customersRelations = relations(customers, ({ many }) => ({
 export const productsRelations = relations(products, ({ many }) => ({
   orderItems: many(orderItems),
 }));
+
+export const categoriesRelations = relations(categories, () => ({}));
+
+export const storeSettingsRelations = relations(storeSettings, () => ({}));
 
 export const paymentMethodsRelations = relations(paymentMethods, ({ many }) => ({
   transactions: many(transactions),

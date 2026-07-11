@@ -1,40 +1,70 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
-import type { OrderLineItem } from "@saasdeep/shared";
-import { submitOrderAndSync } from "@/lib/checkout";
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 import { toast } from "sonner";
+import { submitOrder } from "@/lib/store-api";
 
-interface CartItem extends OrderLineItem {
+interface CartItem {
+  productId: number;
+  title: string;
+  quantity: number;
+  price: number;
+  image: string | null;
   id: string;
 }
 
 interface CartContextValue {
   cart: CartItem[];
-  addItem: (item: OrderLineItem) => void;
+  addItem: (item: Omit<CartItem, "id">) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
-  checkout: (paymentMethod: string, customerEmail?: string, customerName?: string) => Promise<boolean>;
+  itemCount: number;
+  total: number;
+  checkout: (data: {
+    paymentMethod: string;
+    customerName?: string;
+    customerPhone?: string;
+    currency?: string;
+    orderType?: string;
+    tableNumber?: string;
+    deliveryAddress?: string;
+    notes?: string;
+  }) => Promise<{ success: boolean; orderId?: number }>;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
+const STORAGE_KEY = "storefront_cart";
 
-export function CartProvider({ children }: { children: ReactNode }) {
+export function CartProvider({ children, currency = "BDT" }: { children: ReactNode; currency?: string }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addItem = useCallback((item: OrderLineItem) => {
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) setCart(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    } catch {}
+  }, [cart]);
+
+  const addItem = useCallback((item: Omit<CartItem, "id">) => {
     setCart((prev) => {
-      const existing = prev.find((i) => i.productId === item.productId && i.variantId === item.variantId);
+      const existing = prev.find((i) => i.productId === item.productId);
       if (existing) {
         return prev.map((i) =>
-          i.productId === item.productId && i.variantId === item.variantId
+          i.productId === item.productId
             ? { ...i, quantity: i.quantity + item.quantity }
             : i
         );
       }
-      return [...prev, { ...item, id: `${item.productId}-${item.variantId || "default"}-${Date.now()}` }];
+      return [...prev, { ...item, id: `${item.productId}-${Date.now()}` }];
     });
+    toast.success("Added to cart");
   }, []);
 
   const removeItem = useCallback((id: string) => {
@@ -51,35 +81,49 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => setCart([]), []);
 
-  const checkout = useCallback(async (paymentMethod: string, customerEmail?: string, customerName?: string) => {
+  const itemCount = cart.reduce((s, i) => s + i.quantity, 0);
+  const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+
+  const checkout = useCallback(async (data: {
+    paymentMethod: string;
+    customerName?: string;
+    customerPhone?: string;
+    currency?: string;
+    orderType?: string;
+    tableNumber?: string;
+    deliveryAddress?: string;
+    notes?: string;
+  }) => {
     if (cart.length === 0) {
       toast.error("Cart is empty");
-      return false;
+      return { success: false };
     }
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-    const result = await submitOrderAndSync({
-      items: cart,
-      total,
-      currency: "USD",
-      customerEmail,
-      customerName,
-      paymentMethod,
+    const result = await submitOrder({
+      items: cart.map((i) => ({ productId: i.productId, quantity: i.quantity, price: i.price })),
+      total: cart.reduce((s, i) => s + i.price * i.quantity, 0) / 100,
+      currency: data.currency || currency,
+      customerName: data.customerName,
+      customerPhone: data.customerPhone,
+      paymentMethod: data.paymentMethod,
+      orderType: data.orderType,
+      tableNumber: data.tableNumber,
+      deliveryAddress: data.deliveryAddress,
+      notes: data.notes,
     });
 
     if (result.success) {
       setCart([]);
       toast.success("Order placed successfully!");
-      return true;
+      return { success: true, orderId: result.orderId };
     } else {
       toast.error(result.error || "Checkout failed");
-      return false;
+      return { success: false };
     }
-  }, [cart]);
+  }, [cart, currency]);
 
   return (
-    <CartContext.Provider value={{ cart, addItem, removeItem, updateQuantity, clearCart, checkout }}>
+    <CartContext.Provider value={{ cart, addItem, removeItem, updateQuantity, clearCart, itemCount, total, checkout }}>
       {children}
     </CartContext.Provider>
   );

@@ -9,6 +9,7 @@ import { dashboardRouter } from "./routers/dashboard";
 import { fiscalSettingsRouter } from "./routers/fiscal-settings";
 import { fiscalRouter } from "./routers/fiscal";
 import { citiesRouter } from "./routers/cities";
+import { storeSettingsRouter } from "./routers/store-settings";
 
 export const appRouter = router({
   products: productsRouter,
@@ -20,6 +21,7 @@ export const appRouter = router({
   fiscalSettings: fiscalSettingsRouter,
   fiscal: fiscalRouter,
   cities: citiesRouter,
+  storeSettings: storeSettingsRouter,
 });
 
 export type AppRouter = typeof appRouter;

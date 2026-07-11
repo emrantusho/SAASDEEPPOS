@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import type { ProductImage } from "@saasdeep/shared";
 
-export function ProductGallery({ images, title }: { images: ProductImage[]; title: string }) {
+export function ProductGallery({ images, title }: { images: Array<{ url: string; altText?: string }>; title: string }) {
   const [selected, setSelected] = useState(0);
 
-  if (images.length === 0) {
+  if (!images || images.length === 0) {
     return (
       <div className="aspect-square rounded-xl bg-muted flex items-center justify-center">
         <span className="text-muted-foreground text-sm">No Image Available</span>

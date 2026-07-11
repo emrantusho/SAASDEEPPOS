@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, use } from "react";
 import { Button } from "@saasdeep/ui/components/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@saasdeep/ui/components/card";
 import { Input } from "@saasdeep/ui/components/input";
 import { Label } from "@saasdeep/ui/components/label";
 import { useDriveContext } from "@/providers/drive-provider";
 import { useTRPC } from "@/lib/trpc/client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { DEFAULT_STOREFRONT_THEME, PRODUCTS_MANIFEST_VERSION } from "@saasdeep/shared";
 import type { StorefrontTheme, ProductsManifest } from "@saasdeep/shared";
 import { toast } from "sonner";
@@ -20,21 +20,24 @@ import {
   CheckIcon,
   Loader2Icon,
   ImageIcon,
+  StoreIcon,
+  GlobeIcon,
+  BanknoteIcon,
 } from "lucide-react";
 
-const STORAGE_KEY = "saasdeep_storefront_settings";
-
-function loadSavedTheme(): StorefrontTheme {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...DEFAULT_STOREFRONT_THEME, ...JSON.parse(raw) };
-  } catch {}
-  return { ...DEFAULT_STOREFRONT_THEME };
-}
+const PAYMENT_OPTIONS = [
+  { id: "cash", label: "Cash on Delivery" },
+  { id: "bkash", label: "bKash" },
+  { id: "nagad", label: "Nagad" },
+  { id: "card", label: "Credit/Debit Card" },
+  { id: "stripe", label: "Stripe (International)" },
+  { id: "paypal", label: "PayPal (International)" },
+];
 
 const SECTIONS = [
   { id: "theme", label: "Theme", icon: PaintbrushIcon },
   { id: "payment", label: "Payment", icon: CreditCardIcon },
+  { id: "general", label: "General", icon: GlobeIcon },
   { id: "publish", label: "Publish", icon: UploadIcon },
 ] as const;
 
@@ -42,80 +45,144 @@ export default function StorefrontPage() {
   const { isAuthenticated, getAuthUrl, disconnect, pushJsonFile, engine } = useDriveContext();
   const trpc = useTRPC();
   const { data: products = [] } = useQuery(trpc.products.list.queryOptions());
-  const [theme, setTheme] = useState<StorefrontTheme>(loadSavedTheme);
+  const { data: dbSettings, refetch: refetchSettings } = useQuery(
+    trpc.storeSettings.get.queryOptions()
+  );
+
+  const upsertSettings = useMutation(trpc.storeSettings.upsert.mutationOptions({
+    onSuccess: () => {
+      toast.success("Settings saved!");
+      refetchSettings();
+    },
+    onError: (err) => toast.error("Failed to save: " + err.message),
+  }));
+
+  const defaultTheme = { ...DEFAULT_STOREFRONT_THEME };
+
+  const [theme, setTheme] = useState<StorefrontTheme>(defaultTheme);
+  const [selectedPaymentMethods, setSelectedPaymentMethods] = useState<string[]>(["cash", "bkash", "nagad"]);
+  const [currency, setCurrency] = useState("BDT");
+  const [locale, setLocale] = useState("bn");
+  const [storeName, setStoreName] = useState("");
+  const [storeDescription, setStoreDescription] = useState("");
+  const [footerText, setFooterText] = useState("");
+  const [deliveryFee, setDeliveryFee] = useState(0);
+  const [freeDeliveryMin, setFreeDeliveryMin] = useState(0);
+  const [activeSection, setActiveSection] = useState("theme");
   const [publishing, setPublishing] = useState(false);
   const [lastPublished, setLastPublished] = useState<string | null>(null);
-  const [selectedPaymentMethods, setSelectedPaymentMethods] = useState<string[]>(["stripe", "cash"]);
-  const [activeSection, setActiveSection] = useState("theme");
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(theme));
-  }, [theme]);
+    if (dbSettings) {
+      setTheme((prev) => ({
+        ...prev,
+        heroTitle: dbSettings.store_name || prev.heroTitle,
+        heroSubtitle: dbSettings.store_description || prev.heroSubtitle,
+        logoUrl: dbSettings.logo_url || prev.logoUrl,
+        faviconUrl: dbSettings.favicon_url || prev.faviconUrl,
+        footerText: dbSettings.footer_text || prev.footerText,
+        primaryColor: dbSettings.primary_color || prev.primaryColor,
+        secondaryColor: dbSettings.secondary_color || prev.secondaryColor,
+        backgroundColor: dbSettings.background_color || prev.backgroundColor,
+        textColor: dbSettings.text_color || prev.textColor,
+        accentColor: dbSettings.accent_color || prev.accentColor,
+        fontFamily: dbSettings.font_family || prev.fontFamily,
+      }));
+      setStoreName(dbSettings.store_name || "");
+      setStoreDescription(dbSettings.store_description || "");
+      setFooterText(dbSettings.footer_text || "");
+      setCurrency(dbSettings.currency || "BDT");
+      setLocale(dbSettings.locale || "bn");
+      setSelectedPaymentMethods(dbSettings.payment_methods || ["cash", "bkash", "nagad"]);
+      setDeliveryFee(dbSettings.delivery_fee || 0);
+      setFreeDeliveryMin(dbSettings.free_delivery_min || 0);
+    }
+  }, [dbSettings]);
 
-  const updateTheme = useCallback((key: keyof StorefrontTheme, value: string) => {
-    setTheme((prev) => ({ ...prev, [key]: value }));
-  }, []);
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await upsertSettings.mutateAsync({
+        store_name: storeName || theme.heroTitle,
+        store_description: storeDescription || theme.heroSubtitle,
+        logo_url: theme.logoUrl,
+        favicon_url: theme.faviconUrl,
+        footer_text: footerText || theme.footerText,
+        primary_color: theme.primaryColor,
+        secondary_color: theme.secondaryColor,
+        background_color: theme.backgroundColor,
+        text_color: theme.textColor,
+        accent_color: theme.accentColor,
+        font_family: theme.fontFamily,
+        currency,
+        locale,
+        payment_methods: selectedPaymentMethods,
+        delivery_fee: deliveryFee,
+        free_delivery_min: freeDeliveryMin,
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const generateManifest = useCallback((): ProductsManifest => {
     return {
       version: PRODUCTS_MANIFEST_VERSION,
       updatedAt: new Date().toISOString(),
-      currency: "USD",
-      locale: "en",
-      storeName: theme.heroTitle || "Saasdeep Softwares Store",
+      currency,
+      locale,
+      storeName: storeName || theme.heroTitle || "Store",
       theme,
       products: products.map((p: any) => ({
         id: String(p.id),
-        handle: (p.name as string).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
-        title: p.name as string,
-        description: (p.description as string) || "",
-        descriptionHtml: (p.description as string) || "",
-        category: (p.category as string) || "General",
+        handle: p.slug || p.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
+        title: p.name,
+        description: p.description || "",
+        descriptionHtml: p.description || "",
+        category: p.category || "General",
         tags: [],
-        images: [],
-        variants: [
-          {
-            id: `v-${p.id}`,
-            title: "Default",
-            sku: `SKU-${p.id}`,
-            price: (p.price as number) / 100,
-            compareAtPrice: (p.price as number) / 100,
-            available: (p.in_stock as number) > 0,
-            image: null,
-          },
-        ],
+        images: p.images || [],
+        variants: [{
+          id: `v-${p.id}`,
+          title: "Default",
+          sku: `SKU-${p.id}`,
+          price: (p.price || 0) / 100,
+          compareAtPrice: (p.price || 0) / 100,
+          available: (p.in_stock || 0) > 0,
+          image: p.images?.[0]?.url || null,
+        }],
         options: [],
         priceRange: {
-          min: (p.price as number) / 100,
-          max: (p.price as number) / 100,
-          currency: "USD",
+          min: (p.price || 0) / 100,
+          max: (p.price || 0) / 100,
+          currency,
         },
-        seo: { title: p.name as string, description: (p.description as string) || "" },
-        available: (p.in_stock as number) > 0,
-        createdAt: (p.created_at as string) || new Date().toISOString(),
+        seo: { title: p.name, description: p.description || "" },
+        available: (p.in_stock || 0) > 0,
+        createdAt: p.created_at || new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       })),
       collections: [],
     };
-  }, [products, theme]);
+  }, [products, theme, currency, locale, storeName]);
 
   const handlePublish = useCallback(async () => {
-    if (!engine) {
-      toast.error("Connect Google Drive first");
-      return;
-    }
     setPublishing(true);
     try {
-      const manifest = generateManifest();
-      await pushJsonFile("products.json", manifest);
+      await handleSave();
+      if (engine) {
+        const manifest = generateManifest();
+        await pushJsonFile("products.json", manifest);
+      }
       setLastPublished(new Date().toLocaleString());
-      toast.success("Storefront published to Google Drive!");
+      toast.success("Storefront published successfully!");
     } catch (err) {
       toast.error("Failed to publish: " + (err as Error).message);
     } finally {
       setPublishing(false);
     }
-  }, [engine, generateManifest, pushJsonFile]);
+  }, [engine, generateManifest, pushJsonFile, handleSave]);
 
   return (
     <div className="space-y-6">
@@ -124,26 +191,31 @@ export default function StorefrontPage() {
           <h1 className="text-2xl font-bold">Storefront</h1>
           <p className="text-muted-foreground text-sm">Configure your public storefront</p>
         </div>
-        {isAuthenticated ? (
-          <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1 text-sm text-green-600">
-              <CloudIcon className="h-4 w-4" /> Drive Connected
-            </span>
-            <Button variant="outline" size="sm" onClick={disconnect}>Disconnect</Button>
-          </div>
-        ) : (
-          <Button onClick={() => window.location.href = getAuthUrl()}>
-            <CloudOffIcon className="h-4 w-4 mr-2" /> Connect Google Drive
+        <div className="flex items-center gap-2">
+          <Button onClick={handleSave} disabled={saving}>
+            {saving ? <><Loader2Icon className="h-4 w-4 mr-2 animate-spin" /> Saving...</> : "Save Settings"}
           </Button>
-        )}
+          {isAuthenticated ? (
+            <div className="flex items-center gap-2">
+              <span className="flex items-center gap-1 text-sm text-green-600">
+                <CloudIcon className="h-4 w-4" /> Drive
+              </span>
+              <Button variant="outline" size="sm" onClick={disconnect}>Disconnect</Button>
+            </div>
+          ) : (
+            <Button variant="outline" onClick={() => window.location.href = getAuthUrl()}>
+              <CloudOffIcon className="h-4 w-4 mr-2" /> Connect Drive
+            </Button>
+          )}
+        </div>
       </div>
 
-      <div className="flex gap-1 border-b">
+      <div className="flex gap-1 border-b overflow-x-auto">
         {SECTIONS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActiveSection(id)}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeSection === id
                 ? "border-primary text-primary"
                 : "border-transparent text-muted-foreground hover:text-foreground"
@@ -162,31 +234,28 @@ export default function StorefrontPage() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Store Name (Brand)</Label>
-                  <Input value={theme.heroTitle} onChange={(e) => updateTheme("heroTitle", e.target.value)} placeholder="My Store" />
+                  <Label>Store Name</Label>
+                  <Input value={storeName} onChange={(e) => setStoreName(e.target.value)} placeholder="My Store" />
                 </div>
                 <div className="space-y-2">
-                  <Label>Hero Subtitle</Label>
-                  <Input value={theme.heroSubtitle} onChange={(e) => updateTheme("heroSubtitle", e.target.value)} placeholder="Tagline for your store" />
+                  <Label>Description / Tagline</Label>
+                  <Input value={storeDescription} onChange={(e) => setStoreDescription(e.target.value)} placeholder="Tagline for your store" />
                 </div>
                 <div className="space-y-2">
                   <Label>Logo URL (Google Drive image link)</Label>
-                  <div className="flex gap-2">
-                    <Input value={theme.logoUrl} onChange={(e) => updateTheme("logoUrl", e.target.value)} placeholder="https://drive.google.com/..." />
-                    {theme.logoUrl && <ImageIcon className="h-5 w-5 mt-2 text-muted-foreground shrink-0" />}
-                  </div>
+                  <Input value={theme.logoUrl} onChange={(e) => setTheme((p) => ({ ...p, logoUrl: e.target.value }))} placeholder="https://drive.google.com/..." />
                 </div>
                 <div className="space-y-2">
                   <Label>Favicon URL</Label>
-                  <Input value={theme.faviconUrl} onChange={(e) => updateTheme("faviconUrl", e.target.value)} placeholder="https://..." />
+                  <Input value={theme.faviconUrl} onChange={(e) => setTheme((p) => ({ ...p, faviconUrl: e.target.value }))} placeholder="https://..." />
                 </div>
                 <div className="space-y-2">
                   <Label>Footer Text</Label>
-                  <Input value={theme.footerText} onChange={(e) => updateTheme("footerText", e.target.value)} placeholder="All rights reserved." />
+                  <Input value={footerText} onChange={(e) => setFooterText(e.target.value)} placeholder="All rights reserved." />
                 </div>
                 <div className="space-y-2">
                   <Label>Font Family</Label>
-                  <Input value={theme.fontFamily} onChange={(e) => updateTheme("fontFamily", e.target.value)} placeholder="system-ui, sans-serif" />
+                  <Input value={theme.fontFamily} onChange={(e) => setTheme((p) => ({ ...p, fontFamily: e.target.value }))} placeholder="system-ui, sans-serif" />
                 </div>
               </div>
             </CardContent>
@@ -207,13 +276,13 @@ export default function StorefrontPage() {
                   <div className="flex gap-2 items-center">
                     <input
                       type="color"
-                      value={theme[key as keyof StorefrontTheme] as string}
-                      onChange={(e) => updateTheme(key as keyof StorefrontTheme, e.target.value)}
+                      value={(theme as any)[key] || "#000000"}
+                      onChange={(e) => setTheme((p) => ({ ...p, [key]: e.target.value }))}
                       className="h-9 w-9 rounded border cursor-pointer"
                     />
                     <Input
-                      value={theme[key as keyof StorefrontTheme] as string}
-                      onChange={(e) => updateTheme(key as keyof StorefrontTheme, e.target.value)}
+                      value={(theme as any)[key] || ""}
+                      onChange={(e) => setTheme((p) => ({ ...p, [key]: e.target.value }))}
                       className="font-mono text-xs"
                     />
                   </div>
@@ -228,12 +297,7 @@ export default function StorefrontPage() {
         <Card>
           <CardHeader><CardTitle>Payment Methods</CardTitle><CardDescription>Configure available payment options on the storefront</CardDescription></CardHeader>
           <CardContent className="space-y-3">
-            {[
-              { id: "stripe", label: "Stripe", desc: "Credit/debit card payments via Stripe" },
-              { id: "cash", label: "Cash on Delivery", desc: "Customer pays on delivery" },
-              { id: "transfer", label: "Bank Transfer", desc: "Direct bank transfer / PIX" },
-              { id: "paypal", label: "PayPal", desc: "PayPal express checkout" },
-            ].map((method) => (
+            {PAYMENT_OPTIONS.map((method) => (
               <label key={method.id} className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-muted transition-colors">
                 <input
                   type="checkbox"
@@ -249,7 +313,6 @@ export default function StorefrontPage() {
                 />
                 <div>
                   <div className="font-medium text-sm">{method.label}</div>
-                  <div className="text-xs text-muted-foreground">{method.desc}</div>
                 </div>
               </label>
             ))}
@@ -257,20 +320,78 @@ export default function StorefrontPage() {
         </Card>
       )}
 
+      {activeSection === "general" && (
+        <div className="space-y-4">
+          <Card>
+            <CardHeader><CardTitle>Store Settings</CardTitle><CardDescription>Configure currency, locale, and delivery</CardDescription></CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Currency</Label>
+                  <select
+                    value={currency}
+                    onChange={(e) => setCurrency(e.target.value)}
+                    className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+                  >
+                    <option value="BDT">BDT (Taka)</option>
+                    <option value="USD">USD (US Dollar)</option>
+                    <option value="EUR">EUR (Euro)</option>
+                    <option value="GBP">GBP (British Pound)</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Locale / Language</Label>
+                  <select
+                    value={locale}
+                    onChange={(e) => setLocale(e.target.value)}
+                    className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+                  >
+                    <option value="bn">বাংলা (Bengali)</option>
+                    <option value="en">English</option>
+                    <option value="pt-BR">Português (Brasil)</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Delivery Fee (in cents)</Label>
+                  <Input
+                    type="number"
+                    value={deliveryFee}
+                    onChange={(e) => setDeliveryFee(parseInt(e.target.value) || 0)}
+                    placeholder="0"
+                  />
+                  <p className="text-xs text-muted-foreground">0 = free delivery. Enter amount in cents (e.g., 5000 = 50.00 {currency})</p>
+                </div>
+                <div className="space-y-2">
+                  <Label>Free Delivery Minimum (cents)</Label>
+                  <Input
+                    type="number"
+                    value={freeDeliveryMin}
+                    onChange={(e) => setFreeDeliveryMin(parseInt(e.target.value) || 0)}
+                    placeholder="0"
+                  />
+                  <p className="text-xs text-muted-foreground">Order total (in cents) to qualify for free delivery. 0 = disabled.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
       {activeSection === "publish" && (
         <Card>
           <CardHeader>
             <CardTitle>Publish Storefront</CardTitle>
             <CardDescription>
-              Generate and upload the product manifest to Google Drive.
-              The storefront will read this data to display your products.
+              Save settings to database and optionally push manifest to Google Drive for legacy support.
+              The storefront reads data directly from the POS database.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="rounded-lg bg-muted p-4">
               <div className="text-sm font-medium">Products to publish: <span className="text-primary">{products.length}</span></div>
               <div className="text-xs text-muted-foreground mt-1">
-                All products from your catalog will be included in the storefront.
+                All active products from your catalog will be available in the storefront.
+                Images must be hosted on Google Drive and linked in product settings.
               </div>
             </div>
 
@@ -281,24 +402,13 @@ export default function StorefrontPage() {
               </div>
             )}
 
-            <Button
-              onClick={handlePublish}
-              disabled={!isAuthenticated || publishing}
-              size="lg"
-              className="w-full sm:w-auto"
-            >
+            <Button onClick={handlePublish} disabled={publishing} size="lg" className="w-full sm:w-auto">
               {publishing ? (
                 <><Loader2Icon className="h-4 w-4 mr-2 animate-spin" /> Publishing...</>
               ) : (
-                <><UploadIcon className="h-4 w-4 mr-2" /> Publish to Drive</>
+                <><UploadIcon className="h-4 w-4 mr-2" /> Publish Storefront</>
               )}
             </Button>
-
-            {!isAuthenticated && (
-              <p className="text-xs text-muted-foreground">
-                Connect Google Drive above to enable publishing.
-              </p>
-            )}
           </CardContent>
         </Card>
       )}
