@@ -3,7 +3,7 @@ layout: docs
 title: "putQRTag()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / putQRTag
+[@saasdeep/fiscal](/docs/api-reference/index) / putQRTag
 
 
 

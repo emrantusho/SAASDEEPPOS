@@ -3,7 +3,7 @@ layout: docs
 title: "buildDistDFeQueryXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildDistDFeQueryXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildDistDFeQueryXml
 
 
 

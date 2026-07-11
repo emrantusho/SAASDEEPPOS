@@ -23,7 +23,7 @@ import {
   type FiscalSettings,
   type SefazResponse,
   type ContingencyType,
-} from "@finopenpos/fiscal";
+} from "@saasdeep/fiscal";
 import { loadFiscalSettings, incrementNextNumber } from "./fiscal-settings-repository";
 import {
   loadOrderWithItems,
@@ -298,7 +298,7 @@ export async function voidNumberRange(
     passphrase: settings.certificatePassword,
   });
 
-  const { parseStatusResponse } = await import("@finopenpos/fiscal/sefaz-client");
+  const { parseStatusResponse } = await import("@saasdeep/fiscal/sefaz-client");
   const voidResult = parseStatusResponse(response.content);
   const cStat = voidResult.statusCode;
   const xMotivo = voidResult.statusMessage;

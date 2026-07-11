@@ -3,7 +3,7 @@ layout: docs
 title: "attachEventProtocol()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / attachEventProtocol
+[@saasdeep/fiscal](/docs/api-reference/index) / attachEventProtocol
 
 
 

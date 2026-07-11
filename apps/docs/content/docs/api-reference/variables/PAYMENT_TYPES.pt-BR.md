@@ -3,7 +3,7 @@ layout: docs
 title: "PAYMENT\_TYPES"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / PAYMENT\_TYPES
+[@saasdeep/fiscal](/docs/api-reference/index) / PAYMENT\_TYPES
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "validateAccessKey()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / validateAccessKey
+[@saasdeep/fiscal](/docs/api-reference/index) / validateAccessKey
 
 
 

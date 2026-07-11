@@ -3,7 +3,7 @@ layout: docs
 title: "CertificateInfo"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / CertificateInfo
+[@saasdeep/fiscal](/docs/api-reference/index) / CertificateInfo
 
 
 

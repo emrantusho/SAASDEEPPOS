@@ -3,7 +3,7 @@ layout: docs
 title: "ObsItemData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / ObsItemData
+[@saasdeep/fiscal](/docs/api-reference/index) / ObsItemData
 
 
 

@@ -4,7 +4,7 @@ import {
   publicProcedure,
   protectedProcedure,
   type TRPCContext,
-} from "@finopenpos/api";
+} from "@saasdeep/api";
 import { getAuthUser } from "@/lib/auth-guard";
 
 export { router, createCallerFactory, publicProcedure, protectedProcedure };

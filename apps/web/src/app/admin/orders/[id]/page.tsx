@@ -1,11 +1,11 @@
 "use client";
 
 import { use } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@finopenpos/ui/components/card";
-import { Badge } from "@finopenpos/ui/components/badge";
-import { Button } from "@finopenpos/ui/components/button";
-import { Skeleton } from "@finopenpos/ui/components/skeleton";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@finopenpos/ui/components/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@saasdeep/ui/components/card";
+import { Badge } from "@saasdeep/ui/components/badge";
+import { Button } from "@saasdeep/ui/components/button";
+import { Skeleton } from "@saasdeep/ui/components/skeleton";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@saasdeep/ui/components/table";
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { useTRPC } from "@/lib/trpc/client";

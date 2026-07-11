@@ -3,7 +3,7 @@ layout: docs
 title: "extractXmlTagValue()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / extractXmlTagValue
+[@saasdeep/fiscal](/docs/api-reference/index) / extractXmlTagValue
 
 
 

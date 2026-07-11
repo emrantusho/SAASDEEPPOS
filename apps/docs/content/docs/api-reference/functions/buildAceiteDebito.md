@@ -3,7 +3,7 @@ layout: docs
 title: "buildAceiteDebito()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildAceiteDebito
+[@saasdeep/fiscal](/docs/api-reference/index) / buildAceiteDebito
 
 
 

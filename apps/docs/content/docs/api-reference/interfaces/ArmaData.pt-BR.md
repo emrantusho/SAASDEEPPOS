@@ -3,7 +3,7 @@ layout: docs
 title: "ArmaData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / ArmaData
+[@saasdeep/fiscal](/docs/api-reference/index) / ArmaData
 
 
 

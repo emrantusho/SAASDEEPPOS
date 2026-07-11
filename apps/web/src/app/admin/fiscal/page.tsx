@@ -1,21 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader } from "@finopenpos/ui/components/card";
-import { Button } from "@finopenpos/ui/components/button";
-import { Badge } from "@finopenpos/ui/components/badge";
-import { Skeleton } from "@finopenpos/ui/components/skeleton";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@finopenpos/ui/components/dialog";
-import { Input } from "@finopenpos/ui/components/input";
-import { Label } from "@finopenpos/ui/components/label";
+import { Card, CardContent, CardHeader } from "@saasdeep/ui/components/card";
+import { Button } from "@saasdeep/ui/components/button";
+import { Badge } from "@saasdeep/ui/components/badge";
+import { Skeleton } from "@saasdeep/ui/components/skeleton";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@saasdeep/ui/components/dialog";
+import { Input } from "@saasdeep/ui/components/input";
+import { Label } from "@saasdeep/ui/components/label";
 import { ReceiptTextIcon, EyeIcon, XCircleIcon, FileDownIcon, RefreshCwIcon, Loader2Icon } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useTRPC } from "@/lib/trpc/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { invoiceStatusBadgeVariant } from "./utils";
-import { DataTable, TableActions, TableActionButton, type Column } from "@finopenpos/ui/components/data-table";
-import { SearchFilter, type FilterOption } from "@finopenpos/ui/components/search-filter";
+import { DataTable, TableActions, TableActionButton, type Column } from "@saasdeep/ui/components/data-table";
+import { SearchFilter, type FilterOption } from "@saasdeep/ui/components/search-filter";
 import { useTranslations, useLocale } from "next-intl";
 import { formatCurrency } from "@/lib/utils";
 

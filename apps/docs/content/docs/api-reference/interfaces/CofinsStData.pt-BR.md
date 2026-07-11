@@ -3,7 +3,7 @@ layout: docs
 title: "CofinsStData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / CofinsStData
+[@saasdeep/fiscal](/docs/api-reference/index) / CofinsStData
 
 
 

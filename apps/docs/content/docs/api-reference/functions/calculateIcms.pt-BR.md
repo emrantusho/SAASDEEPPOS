@@ -3,7 +3,7 @@ layout: docs
 title: "calculateIcms()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / calculateIcms
+[@saasdeep/fiscal](/docs/api-reference/index) / calculateIcms
 
 
 

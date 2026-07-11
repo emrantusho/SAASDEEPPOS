@@ -3,7 +3,7 @@ layout: docs
 title: "buildDeliveryFailureCancellationXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildDeliveryFailureCancellationXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildDeliveryFailureCancellationXml
 
 
 

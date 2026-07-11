@@ -3,7 +3,7 @@ layout: docs
 title: "TaxRegime"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / TaxRegime
+[@saasdeep/fiscal](/docs/api-reference/index) / TaxRegime
 
 
 

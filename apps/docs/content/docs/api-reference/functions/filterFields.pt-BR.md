@@ -3,7 +3,7 @@ layout: docs
 title: "filterFields()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / filterFields
+[@saasdeep/fiscal](/docs/api-reference/index) / filterFields
 
 
 

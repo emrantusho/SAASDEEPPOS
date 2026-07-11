@@ -3,17 +3,17 @@ import { execSync } from "node:child_process";
 import fs from "node:fs";
 import { getCertificateInfo, loadCertificate, signXml } from "../certificate";
 
-const PFX_PATH = "/tmp/finopenpos-test-cert.pfx";
+const PFX_PATH = "/tmp/saasdeep-test-cert.pfx";
 const PFX_PASS = "test123";
 let pfxBuffer: Buffer;
 
 beforeAll(() => {
   // Generate a self-signed certificate for testing
   execSync(
-    `openssl req -x509 -newkey rsa:2048 -keyout /tmp/finopenpos-test-key.pem -out /tmp/finopenpos-test-cert.pem -days 365 -nodes -subj "/CN=Test NFe Company/O=FinOpenPOS Test" 2>/dev/null`
+    `openssl req -x509 -newkey rsa:2048 -keyout /tmp/saasdeep-test-key.pem -out /tmp/saasdeep-test-cert.pem -days 365 -nodes -subj "/CN=Test NFe Company/O=Saasdeep Softwares Test" 2>/dev/null`
   );
   execSync(
-    `openssl pkcs12 -export -out ${PFX_PATH} -inkey /tmp/finopenpos-test-key.pem -in /tmp/finopenpos-test-cert.pem -passout pass:${PFX_PASS} 2>/dev/null`
+    `openssl pkcs12 -export -out ${PFX_PATH} -inkey /tmp/saasdeep-test-key.pem -in /tmp/saasdeep-test-cert.pem -passout pass:${PFX_PASS} 2>/dev/null`
   );
   pfxBuffer = fs.readFileSync(PFX_PATH);
 });

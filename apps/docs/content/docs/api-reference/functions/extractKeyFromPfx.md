@@ -3,7 +3,7 @@ layout: docs
 title: "extractKeyFromPfx()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / extractKeyFromPfx
+[@saasdeep/fiscal](/docs/api-reference/index) / extractKeyFromPfx
 
 
 

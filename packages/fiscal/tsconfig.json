@@ -1,5 +1,5 @@
 {
-  "extends": "@finopenpos/config/tsconfig.base.json",
+  "extends": "@saasdeep/config/tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src"

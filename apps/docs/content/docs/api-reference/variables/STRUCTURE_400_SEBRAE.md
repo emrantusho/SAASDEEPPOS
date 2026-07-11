@@ -3,7 +3,7 @@ layout: docs
 title: "STRUCTURE\_400\_SEBRAE"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / STRUCTURE\_400\_SEBRAE
+[@saasdeep/fiscal](/docs/api-reference/index) / STRUCTURE\_400\_SEBRAE
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "ParserError"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / ParserError
+[@saasdeep/fiscal](/docs/api-reference/index) / ParserError
 
 
 

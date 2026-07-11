@@ -3,7 +3,7 @@ layout: docs
 title: "buildCofinsStXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildCofinsStXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildCofinsStXml
 
 
 

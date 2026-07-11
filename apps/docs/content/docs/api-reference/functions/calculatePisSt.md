@@ -3,7 +3,7 @@ layout: docs
 title: "calculatePisSt()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / calculatePisSt
+[@saasdeep/fiscal](/docs/api-reference/index) / calculatePisSt
 
 
 

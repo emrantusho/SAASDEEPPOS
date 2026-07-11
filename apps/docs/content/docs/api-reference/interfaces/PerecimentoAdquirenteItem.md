@@ -3,7 +3,7 @@ layout: docs
 title: "PerecimentoAdquirenteItem"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / PerecimentoAdquirenteItem
+[@saasdeep/fiscal](/docs/api-reference/index) / PerecimentoAdquirenteItem
 
 
 

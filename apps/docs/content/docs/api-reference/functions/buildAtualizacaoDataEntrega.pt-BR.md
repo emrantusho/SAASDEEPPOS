@@ -3,7 +3,7 @@ layout: docs
 title: "buildAtualizacaoDataEntrega()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildAtualizacaoDataEntrega
+[@saasdeep/fiscal](/docs/api-reference/index) / buildAtualizacaoDataEntrega
 
 
 

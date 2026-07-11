@@ -3,7 +3,7 @@ layout: docs
 title: "SEFAZ\_STATUS"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / SEFAZ\_STATUS
+[@saasdeep/fiscal](/docs/api-reference/index) / SEFAZ\_STATUS
 
 
 

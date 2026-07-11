@@ -3,7 +3,7 @@ layout: docs
 title: "getStructure()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / getStructure
+[@saasdeep/fiscal](/docs/api-reference/index) / getStructure
 
 
 

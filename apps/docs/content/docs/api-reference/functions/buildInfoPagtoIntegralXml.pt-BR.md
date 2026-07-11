@@ -3,7 +3,7 @@ layout: docs
 title: "buildInfoPagtoIntegralXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildInfoPagtoIntegralXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildInfoPagtoIntegralXml
 
 
 

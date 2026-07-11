@@ -3,7 +3,7 @@ layout: docs
 title: "getEventDescription()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / getEventDescription
+[@saasdeep/fiscal](/docs/api-reference/index) / getEventDescription
 
 
 

@@ -1,6 +1,6 @@
-# FinOpenPOS
+# Saasdeep Softwares
 
-Open-source Point of Sale (POS) and inventory management system with **Brazilian fiscal module** (NF-e/NFC-e). Built with Next.js 16, React 19 and embedded PostgreSQL via PGLite. Turborepo monorepo with the fiscal module as a standalone package. Zero external dependencies to run — `bun install && bun run dev` and you're set.
+Saasdeep Softwares - Point of Sale (POS) and inventory management system with **Brazilian fiscal module** (NF-e/NFC-e). Built with Next.js 16, React 19 and embedded PostgreSQL via PGLite. Turborepo monorepo with the fiscal module as a standalone package. Zero external dependencies to run — `bun install && bun run dev` and you're set.
 
 > **[Leia em Portugues](README.ptBR.md)**
 
@@ -94,7 +94,7 @@ flowchart LR
 | Runtime | Bun |
 | i18n | next-intl (en + pt-BR) |
 | Monorepo | Turborepo, Biome |
-| Fiscal Module | @finopenpos/fiscal (standalone package) |
+| Fiscal Module | @saasdeep/fiscal (standalone package) |
 
 ## Quick Start
 
@@ -151,7 +151,7 @@ FinOpenPOS/
 │       ├── scripts/            # DB ensure, ER gen, prepare-prod
 │       └── data/               # PGLite database (gitignored)
 ├── packages/
-│   └── fiscal/                 # @finopenpos/fiscal — standalone fiscal library
+│   └── fiscal/                 # @saasdeep/fiscal — standalone fiscal library
 │       └── src/
 │           ├── __tests__/      # 754 tests (ported from PHP sped-nfe)
 │           ├── value-objects/   # AccessKey, TaxId
@@ -170,7 +170,7 @@ FinOpenPOS/
 
 ## Fiscal Module (NF-e / NFC-e)
 
-The fiscal module lives in `packages/fiscal/` as `@finopenpos/fiscal` — a standalone package with zero database dependencies. It can be used independently in any TypeScript/JavaScript project.
+The fiscal module lives in `packages/fiscal/` as `@saasdeep/fiscal` — a standalone package with zero database dependencies. It can be used independently in any TypeScript/JavaScript project.
 
 The fiscal module implements complete Brazilian electronic invoicing following the SEFAZ MOC 4.00 specification, ported from the PHP [sped-nfe](https://github.com/nfephp-org/sped-nfe) library to TypeScript with DDD architecture.
 

@@ -1,1 +1,1 @@
-export { authClient } from "@finopenpos/auth/client";
+export { authClient } from "@saasdeep/auth/client";

@@ -3,7 +3,7 @@ layout: docs
 title: "getSefazUrl()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / getSefazUrl
+[@saasdeep/fiscal](/docs/api-reference/index) / getSefazUrl
 
 
 

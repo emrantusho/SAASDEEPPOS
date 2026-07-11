@@ -3,7 +3,7 @@ layout: docs
 title: "createIssqnTotals()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / createIssqnTotals
+[@saasdeep/fiscal](/docs/api-reference/index) / createIssqnTotals
 
 
 

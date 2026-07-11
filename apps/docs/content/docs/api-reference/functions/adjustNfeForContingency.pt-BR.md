@@ -3,7 +3,7 @@ layout: docs
 title: "adjustNfeForContingency()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / adjustNfeForContingency
+[@saasdeep/fiscal](/docs/api-reference/index) / adjustNfeForContingency
 
 
 

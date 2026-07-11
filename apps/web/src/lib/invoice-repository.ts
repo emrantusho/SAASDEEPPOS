@@ -13,7 +13,7 @@ import type {
   FiscalSettings,
   SefazResponse,
   SefazEnvironment,
-} from "@finopenpos/fiscal";
+} from "@saasdeep/fiscal";
 
 // ── Types for repository inputs ─────────────────────────────────────────────
 

@@ -3,7 +3,7 @@ layout: docs
 title: "VALID\_EVENT\_STATUSES"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / VALID\_EVENT\_STATUSES
+[@saasdeep/fiscal](/docs/api-reference/index) / VALID\_EVENT\_STATUSES
 
 
 

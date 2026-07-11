@@ -12,11 +12,11 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@finopenpos/ui/components",
-    "utils": "@finopenpos/ui/lib/utils",
-    "hooks": "@finopenpos/ui/hooks",
-    "lib": "@finopenpos/ui/lib",
-    "ui": "@finopenpos/ui/components"
+    "components": "@saasdeep/ui/components",
+    "utils": "@saasdeep/ui/lib/utils",
+    "hooks": "@saasdeep/ui/hooks",
+    "lib": "@saasdeep/ui/lib",
+    "ui": "@saasdeep/ui/components"
   },
   "menuColor": "default",
   "menuAccent": "subtle",

@@ -3,7 +3,7 @@ layout: docs
 title: "formatRate4()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / formatRate4
+[@saasdeep/fiscal](/docs/api-reference/index) / formatRate4
 
 
 

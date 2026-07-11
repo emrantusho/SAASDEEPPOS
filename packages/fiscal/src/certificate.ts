@@ -170,7 +170,7 @@ export function signEventXml(
  */
 export function extractCertFromPfx(pfxBuffer: Buffer, passphrase: string): string {
   const { execSync } = require("node:child_process");
-  const tmpPfx = "/tmp/_finopenpos_cert_extract.pfx";
+  const tmpPfx = "/tmp/_saasdeep_cert_extract.pfx";
   require("node:fs").writeFileSync(tmpPfx, pfxBuffer);
   try {
     const certPem = execSync(
@@ -201,7 +201,7 @@ export function extractCertFromPfx(pfxBuffer: Buffer, passphrase: string): strin
  */
 export function extractKeyFromPfx(pfxBuffer: Buffer, passphrase: string): string {
   const { execSync } = require("node:child_process");
-  const tmpPfx = "/tmp/_finopenpos_key_extract.pfx";
+  const tmpPfx = "/tmp/_saasdeep_key_extract.pfx";
   require("node:fs").writeFileSync(tmpPfx, pfxBuffer);
   try {
     const keyPem = execSync(

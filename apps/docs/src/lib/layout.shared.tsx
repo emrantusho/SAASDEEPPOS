@@ -5,7 +5,7 @@ export function baseOptions(locale: string): BaseLayoutProps {
   return {
     i18n,
     nav: {
-      title: "FinOpenPOS",
+      title: "Saasdeep Softwares",
       url: `/${locale}`,
     },
     links: [

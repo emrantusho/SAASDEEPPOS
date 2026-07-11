@@ -3,7 +3,7 @@ layout: docs
 title: "calculateIs()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / calculateIs
+[@saasdeep/fiscal](/docs/api-reference/index) / calculateIs
 
 
 

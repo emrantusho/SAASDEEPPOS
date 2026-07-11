@@ -2,11 +2,11 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Create `apps/www` — a developer-focused landing page with Neon.com-inspired dark aesthetic, serving as the public face of FinOpenPOS.
+**Goal:** Create `apps/www` — a developer-focused landing page with Neon.com-inspired dark aesthetic, serving as the public face of Saasdeep Softwares.
 
-**Architecture:** New Next.js app in the monorepo (`@finopenpos/www`, port 3003). SSR with Server Components for Lighthouse 100. CSS-only animations. i18n via next-intl (cookie-based). `apps/web` redirects unauthenticated `/` to `LANDING_URL`. Non-production Dockerfile serves all 3 apps via Nginx reverse proxy.
+**Architecture:** New Next.js app in the monorepo (`@saasdeep/www`, port 3003). SSR with Server Components for Lighthouse 100. CSS-only animations. i18n via next-intl (cookie-based). `apps/web` redirects unauthenticated `/` to `LANDING_URL`. Non-production Dockerfile serves all 3 apps via Nginx reverse proxy.
 
-**Tech Stack:** Next.js 16, Tailwind CSS 4, next-intl, lucide-react, @finopenpos/ui, CSS animations
+**Tech Stack:** Next.js 16, Tailwind CSS 4, next-intl, lucide-react, @saasdeep/ui, CSS animations
 
 ---
 
@@ -24,7 +24,7 @@
 
 ```json
 {
-  "name": "@finopenpos/www",
+  "name": "@saasdeep/www",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -33,7 +33,7 @@
     "start": "next start --port 3003"
   },
   "dependencies": {
-    "@finopenpos/ui": "workspace:*",
+    "@saasdeep/ui": "workspace:*",
     "lucide-react": "catalog:",
     "next": "catalog:",
     "next-intl": "^4.8.3",
@@ -41,7 +41,7 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@finopenpos/config": "workspace:*",
+    "@saasdeep/config": "workspace:*",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
@@ -111,7 +111,7 @@ export default config;
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "FinOpenPOS",
+  title: "Saasdeep Softwares",
   description: "Open-source point of sale system",
 };
 
@@ -127,7 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 `apps/www/src/app/page.tsx`:
 ```tsx
 export default function Home() {
-  return <div>FinOpenPOS Landing</div>;
+  return <div>Saasdeep Softwares Landing</div>;
 }
 ```
 
@@ -135,7 +135,7 @@ export default function Home() {
 
 Add to root `package.json` scripts:
 ```json
-"dev:www": "turbo -F @finopenpos/www dev"
+"dev:www": "turbo -F @saasdeep/www dev"
 ```
 
 **Step 7: Run `bun install` and verify dev server starts**
@@ -237,7 +237,7 @@ feat(www): add i18n with next-intl
 **Step 1: Build Header**
 
 - Sticky header with backdrop-blur, border-bottom
-- Logo (FinOpenPOS text or icon)
+- Logo (Saasdeep Softwares text or icon)
 - Nav links: Features, Docs, GitHub
 - Locale switcher (en/pt-BR)
 - CTA button: "Get Started" / "Star on GitHub"
@@ -449,7 +449,7 @@ LANDING_URL: z.string().url().optional(),
 When path is exactly `/` and `LANDING_URL` is set and user is not authenticated → redirect to `LANDING_URL`.
 
 ```typescript
-import { env } from "@finopenpos/env/server";
+import { env } from "@saasdeep/env/server";
 
 // At the top of the proxy function, before the auth check:
 if (pathname === "/" && env.LANDING_URL) {
@@ -461,7 +461,7 @@ if (pathname === "/" && env.LANDING_URL) {
 
 ```tsx
 import { redirect } from "next/navigation";
-import { env } from "@finopenpos/env/server";
+import { env } from "@saasdeep/env/server";
 
 export default function Home() {
   if (env.LANDING_URL) {

@@ -3,7 +3,7 @@ layout: docs
 title: "formatDecimal()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / formatDecimal
+[@saasdeep/fiscal](/docs/api-reference/index) / formatDecimal
 
 
 

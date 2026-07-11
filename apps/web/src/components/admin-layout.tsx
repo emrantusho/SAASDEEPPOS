@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@finopenpos/ui/components/button";
+import { Button } from "@saasdeep/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -10,13 +10,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
-} from "@finopenpos/ui/components/dropdown-menu";
+} from "@saasdeep/ui/components/dropdown-menu";
 import {
   TooltipProvider,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@finopenpos/ui/components/tooltip";
+} from "@saasdeep/ui/components/tooltip";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import {
@@ -32,6 +32,7 @@ import {
   XIcon,
   ReceiptTextIcon,
   SettingsIcon,
+  StoreIcon,
   type LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -41,7 +42,7 @@ import { logout } from "@/app/login/actions";
 
 interface NavItem {
   href: string;
-  labelKey: "dashboard" | "cashier" | "products" | "customers" | "orders" | "paymentMethods" | "pos" | "invoices" | "fiscalSettings";
+  labelKey: "dashboard" | "cashier" | "products" | "customers" | "orders" | "paymentMethods" | "pos" | "invoices" | "fiscalSettings" | "storefront";
   icon: LucideIcon;
 }
 
@@ -55,6 +56,7 @@ const navItems: NavItem[] = [
   { href: "/admin/pos", labelKey: "pos", icon: ShoppingCartIcon },
   { href: "/admin/fiscal", labelKey: "invoices", icon: ReceiptTextIcon },
   { href: "/admin/fiscal/settings", labelKey: "fiscalSettings", icon: SettingsIcon },
+  { href: "/admin/storefront", labelKey: "storefront", icon: StoreIcon },
 ];
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -131,7 +133,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Package2Icon className="h-6 w-6" />
-                <span>FinOpenPOS</span>
+                <span>Saasdeep</span>
               </Link>
               <Button
                 variant="ghost"
@@ -187,6 +189,9 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         </aside>
         <main className="flex-1 p-3 sm:px-6 sm:py-0 overflow-x-hidden">{children}</main>
       </div>
+      <footer className="border-t border-border bg-background py-3 text-center text-[10px] text-muted-foreground/60">
+        &copy; {new Date().getFullYear()} Saasdeep Softwares. All rights reserved.
+      </footer>
     </div>
   );
 }

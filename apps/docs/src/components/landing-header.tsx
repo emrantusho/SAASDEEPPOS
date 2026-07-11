@@ -26,7 +26,7 @@ export default function Header() {
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-neon-accent shadow-[0_0_8px_rgba(52,213,154,0.6)]" />
           </span>
           <span className="font-medium text-base text-white tracking-tight">
-            FinOpenPOS
+            Saasdeep Softwares
           </span>
         </a>
 

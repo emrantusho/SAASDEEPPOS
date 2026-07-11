@@ -3,7 +3,7 @@ layout: docs
 title: "MedData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / MedData
+[@saasdeep/fiscal](/docs/api-reference/index) / MedData
 
 
 

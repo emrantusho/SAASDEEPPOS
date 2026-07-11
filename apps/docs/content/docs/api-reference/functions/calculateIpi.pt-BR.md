@@ -3,7 +3,7 @@ layout: docs
 title: "calculateIpi()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / calculateIpi
+[@saasdeep/fiscal](/docs/api-reference/index) / calculateIpi
 
 
 

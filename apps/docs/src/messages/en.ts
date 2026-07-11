@@ -111,13 +111,13 @@ const messages = {
 	cta: {
 		title: "Ready to contribute?",
 		subtitle:
-			"FinOpenPOS is open-source and community-driven. Every contribution counts.",
+			"Saasdeep Softwares is open-source and community-driven. Every contribution counts.",
 		starOnGithub: "Star on GitHub",
 		readDocs: "Read the Docs",
 	},
 	footer: {
 		builtWith: "Built with",
-		by: "by the FinOpenPOS community",
+		by: "by the Saasdeep Softwares community",
 		github: "GitHub",
 		docs: "Documentation",
 		license: "MIT License",

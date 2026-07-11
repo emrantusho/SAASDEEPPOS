@@ -3,7 +3,7 @@ layout: docs
 title: "buildBatchManifestationXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildBatchManifestationXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildBatchManifestationXml
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "buildPisStXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildPisStXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildPisStXml
 
 
 

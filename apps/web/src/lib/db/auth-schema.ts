@@ -1,1 +1,1 @@
-export * from "@finopenpos/db/auth-schema";
+export * from "@saasdeep/db/auth-schema";

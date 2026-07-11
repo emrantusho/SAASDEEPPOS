@@ -127,7 +127,7 @@ export default defineConfig({
   console.log("7. Updating .env.example...");
   let envExample = readFile(".env.example");
   if (!envExample.includes("DATABASE_URL")) {
-    envExample += "DATABASE_URL=postgresql://user:password@localhost:5432/finopenpos\n";
+    envExample += "DATABASE_URL=postgresql://user:password@localhost:5432/saasdeep\n";
     writeFile(".env.example", envExample);
   }
   console.log("  Done.\n");

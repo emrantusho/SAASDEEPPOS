@@ -143,7 +143,7 @@ function buildIde(
     tag("indPres", {}, data.buyerPresence ?? "0"),
     tag("indIntermed", {}, data.intermediaryIndicator ?? "0"),
     tag("procEmi", {}, data.emissionProcess ?? "0"),
-    tag("verProc", {}, "FinOpenPOS 1.0"),
+    tag("verProc", {}, "Saasdeep Softwares 1.0"),
     ...refElements,
   ]);
 }

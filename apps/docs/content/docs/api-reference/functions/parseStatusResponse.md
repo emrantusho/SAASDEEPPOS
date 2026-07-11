@@ -3,7 +3,7 @@ layout: docs
 title: "parseStatusResponse()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / parseStatusResponse
+[@saasdeep/fiscal](/docs/api-reference/index) / parseStatusResponse
 
 
 

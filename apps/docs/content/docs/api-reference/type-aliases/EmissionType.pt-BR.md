@@ -3,7 +3,7 @@ layout: docs
 title: "EmissionType"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / EmissionType
+[@saasdeep/fiscal](/docs/api-reference/index) / EmissionType
 
 
 

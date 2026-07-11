@@ -3,7 +3,7 @@ layout: docs
 title: "parseAuthorizationResponse()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / parseAuthorizationResponse
+[@saasdeep/fiscal](/docs/api-reference/index) / parseAuthorizationResponse
 
 
 

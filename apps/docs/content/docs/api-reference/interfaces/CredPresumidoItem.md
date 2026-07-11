@@ -3,7 +3,7 @@ layout: docs
 title: "CredPresumidoItem"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / CredPresumidoItem
+[@saasdeep/fiscal](/docs/api-reference/index) / CredPresumidoItem
 
 
 

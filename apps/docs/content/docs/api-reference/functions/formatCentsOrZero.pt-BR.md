@@ -3,7 +3,7 @@ layout: docs
 title: "formatCentsOrZero()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / formatCentsOrZero
+[@saasdeep/fiscal](/docs/api-reference/index) / formatCentsOrZero
 
 
 

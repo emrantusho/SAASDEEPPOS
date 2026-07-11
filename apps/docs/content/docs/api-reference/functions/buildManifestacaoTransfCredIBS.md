@@ -3,7 +3,7 @@ layout: docs
 title: "buildManifestacaoTransfCredIBS()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildManifestacaoTransfCredIBS
+[@saasdeep/fiscal](/docs/api-reference/index) / buildManifestacaoTransfCredIBS
 
 
 

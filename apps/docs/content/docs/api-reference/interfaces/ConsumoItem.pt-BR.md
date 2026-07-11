@@ -3,7 +3,7 @@ layout: docs
 title: "ConsumoItem"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / ConsumoItem
+[@saasdeep/fiscal](/docs/api-reference/index) / ConsumoItem
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "buildStatusRequestXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildStatusRequestXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildStatusRequestXml
 
 
 

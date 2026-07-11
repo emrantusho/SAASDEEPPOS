@@ -3,7 +3,7 @@ layout: docs
 title: "PutQRTagParams"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / PutQRTagParams
+[@saasdeep/fiscal](/docs/api-reference/index) / PutQRTagParams
 
 
 

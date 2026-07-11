@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-If you find a security vulnerability in FinOpenPOS, **do not open a public issue**.
+If you find a security vulnerability in Saasdeep Softwares, **do not open a public issue**.
 
 Instead, email **joaohenriquebarbosa21@gmail.com** with:
 

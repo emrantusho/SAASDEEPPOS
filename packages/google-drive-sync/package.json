@@ -1,0 +1,21 @@
+{
+  "name": "@saasdeep/google-drive-sync",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@saasdeep/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@saasdeep/config": "workspace:*",
+    "typescript": "^5"
+  }
+}

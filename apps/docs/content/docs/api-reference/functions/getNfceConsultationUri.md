@@ -3,7 +3,7 @@ layout: docs
 title: "getNfceConsultationUri()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / getNfceConsultationUri
+[@saasdeep/fiscal](/docs/api-reference/index) / getNfceConsultationUri
 
 
 

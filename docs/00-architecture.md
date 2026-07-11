@@ -6,7 +6,7 @@ The fiscal module implements complete Brazilian electronic invoicing (NF-e model
 
 ### Monorepo Structure
 
-The project uses a Turborepo monorepo. The pure fiscal logic lives in a standalone package (`@finopenpos/fiscal`) at `packages/fiscal/`, with zero database dependencies. The DB-coupled files (repositories and invoice service) live in the app layer at `apps/web/src/lib/`.
+The project uses a Turborepo monorepo. The pure fiscal logic lives in a standalone package (`@saasdeep/fiscal`) at `packages/fiscal/`, with zero database dependencies. The DB-coupled files (repositories and invoice service) live in the app layer at `apps/web/src/lib/`.
 
 - **`packages/fiscal/src/`** — standalone fiscal package (domain logic, XML, SEFAZ, etc.)
 - **`apps/web/src/lib/`** — DB-coupled service/repository files (invoice-service, invoice-repository, fiscal-settings-repository)
@@ -93,7 +93,7 @@ All database tables are keyed by `user_uid`. Every repository function receives 
 
 ## File Index
 
-All files in the **`@finopenpos/fiscal`** package live under `packages/fiscal/src/`. The three DB-coupled files live in `apps/web/src/lib/`.
+All files in the **`@saasdeep/fiscal`** package live under `packages/fiscal/src/`. The three DB-coupled files live in `apps/web/src/lib/`.
 
 | File | Location | Layer | Purpose |
 |------|----------|-------|---------|

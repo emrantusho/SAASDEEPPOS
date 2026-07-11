@@ -47,6 +47,7 @@ const messages = {
     pos: "Point of Sale",
     fiscal: "Fiscal",
     fiscalSettings: "Fiscal Settings",
+    storefront: "Storefront",
     invoices: "Invoices",
     adminPanel: "Admin Panel",
     openMenu: "Open menu",

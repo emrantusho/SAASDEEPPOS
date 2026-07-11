@@ -3,7 +3,7 @@ layout: docs
 title: "attachCancellation()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / attachCancellation
+[@saasdeep/fiscal](/docs/api-reference/index) / attachCancellation
 
 
 

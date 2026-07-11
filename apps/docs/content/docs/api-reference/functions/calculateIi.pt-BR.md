@@ -3,7 +3,7 @@ layout: docs
 title: "calculateIi()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / calculateIi
+[@saasdeep/fiscal](/docs/api-reference/index) / calculateIi
 
 
 

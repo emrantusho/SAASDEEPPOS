@@ -3,7 +3,7 @@ layout: docs
 title: "resolveVerAplic()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / resolveVerAplic
+[@saasdeep/fiscal](/docs/api-reference/index) / resolveVerAplic
 
 
 

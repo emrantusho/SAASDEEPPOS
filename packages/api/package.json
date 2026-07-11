@@ -1,5 +1,5 @@
 {
-  "name": "@finopenpos/api",
+  "name": "@saasdeep/api",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -21,7 +21,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@finopenpos/config": "workspace:*",
+    "@saasdeep/config": "workspace:*",
     "typescript": "^5"
   }
 }

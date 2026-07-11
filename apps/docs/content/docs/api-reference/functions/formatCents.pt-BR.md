@@ -3,7 +3,7 @@ layout: docs
 title: "formatCents()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / formatCents
+[@saasdeep/fiscal](/docs/api-reference/index) / formatCents
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "buildInterestedActorXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildInterestedActorXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildInterestedActorXml
 
 
 

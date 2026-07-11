@@ -3,7 +3,7 @@ layout: docs
 title: "EVENT\_TYPES"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / EVENT\_TYPES
+[@saasdeep/fiscal](/docs/api-reference/index) / EVENT\_TYPES
 
 
 

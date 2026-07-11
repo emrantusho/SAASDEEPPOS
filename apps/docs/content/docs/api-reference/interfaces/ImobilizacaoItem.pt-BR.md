@@ -3,7 +3,7 @@ layout: docs
 title: "ImobilizacaoItem"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / ImobilizacaoItem
+[@saasdeep/fiscal](/docs/api-reference/index) / ImobilizacaoItem
 
 
 

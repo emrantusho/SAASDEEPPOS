@@ -3,7 +3,7 @@ layout: docs
 title: "buildEpecNfceStatusXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildEpecNfceStatusXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildEpecNfceStatusXml
 
 
 

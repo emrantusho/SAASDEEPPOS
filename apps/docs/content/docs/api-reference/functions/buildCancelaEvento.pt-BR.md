@@ -3,7 +3,7 @@ layout: docs
 title: "buildCancelaEvento()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildCancelaEvento
+[@saasdeep/fiscal](/docs/api-reference/index) / buildCancelaEvento
 
 
 

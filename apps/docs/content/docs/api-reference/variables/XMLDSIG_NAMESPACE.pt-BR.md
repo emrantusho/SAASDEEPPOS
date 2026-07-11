@@ -3,7 +3,7 @@ layout: docs
 title: "XMLDSIG\_NAMESPACE"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / XMLDSIG\_NAMESPACE
+[@saasdeep/fiscal](/docs/api-reference/index) / XMLDSIG\_NAMESPACE
 
 
 

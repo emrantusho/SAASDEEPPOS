@@ -1,6 +1,6 @@
-# FinOpenPOS
+# Saasdeep Softwares
 
-Sistema open-source de Ponto de Venda (PDV) e gestao de estoque com **modulo fiscal brasileiro** (NF-e/NFC-e). Construido com Next.js 16, React 19 e PostgreSQL embarcado via PGLite. Monorepo Turborepo com o modulo fiscal como pacote standalone. Zero dependencias externas para rodar — `bun install && bun run dev` e pronto.
+Saasdeep Softwares - Sistema de Ponto de Venda (PDV) e gestao de estoque com **modulo fiscal brasileiro** (NF-e/NFC-e). Construido com Next.js 16, React 19 e PostgreSQL embarcado via PGLite. Monorepo Turborepo com o modulo fiscal como pacote standalone. Zero dependencias externas para rodar — `bun install && bun run dev` e pronto.
 
 > **[Read in English](README.md)**
 
@@ -94,7 +94,7 @@ flowchart LR
 | Runtime | Bun |
 | i18n | next-intl (en + pt-BR) |
 | Monorepo | Turborepo, Biome |
-| Modulo Fiscal | @finopenpos/fiscal (pacote standalone) |
+| Modulo Fiscal | @saasdeep/fiscal (pacote standalone) |
 
 ## Quick Start
 
@@ -151,7 +151,7 @@ FinOpenPOS/
 │       ├── scripts/            # DB ensure, ER gen, prepare-prod
 │       └── data/               # Banco PGLite (gitignored)
 ├── packages/
-│   └── fiscal/                 # @finopenpos/fiscal — lib fiscal standalone
+│   └── fiscal/                 # @saasdeep/fiscal — lib fiscal standalone
 │       └── src/
 │           ├── __tests__/      # 754 testes (portados do PHP sped-nfe)
 │           ├── value-objects/   # AccessKey, TaxId
@@ -170,7 +170,7 @@ FinOpenPOS/
 
 ## Modulo Fiscal (NF-e / NFC-e)
 
-O modulo fiscal vive em `packages/fiscal/` como `@finopenpos/fiscal` — um pacote standalone com zero dependencia de banco de dados. Pode ser usado independentemente em qualquer projeto TypeScript/JavaScript.
+O modulo fiscal vive em `packages/fiscal/` como `@saasdeep/fiscal` — um pacote standalone com zero dependencia de banco de dados. Pode ser usado independentemente em qualquer projeto TypeScript/JavaScript.
 
 O modulo implementa emissao completa de notas fiscais eletronicas seguindo a especificacao MOC 4.00 da SEFAZ, portado da biblioteca PHP [sped-nfe](https://github.com/nfephp-org/sped-nfe) para TypeScript com arquitetura DDD.
 

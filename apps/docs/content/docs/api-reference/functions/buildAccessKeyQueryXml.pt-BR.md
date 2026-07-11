@@ -3,7 +3,7 @@ layout: docs
 title: "buildAccessKeyQueryXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildAccessKeyQueryXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildAccessKeyQueryXml
 
 
 

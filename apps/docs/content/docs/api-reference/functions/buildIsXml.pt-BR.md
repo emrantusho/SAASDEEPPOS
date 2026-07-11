@@ -3,7 +3,7 @@ layout: docs
 title: "buildIsXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildIsXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildIsXml
 
 
 

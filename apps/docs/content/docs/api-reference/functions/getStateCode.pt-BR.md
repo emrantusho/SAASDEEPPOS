@@ -3,7 +3,7 @@ layout: docs
 title: "getStateCode()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / getStateCode
+[@saasdeep/fiscal](/docs/api-reference/index) / getStateCode
 
 
 

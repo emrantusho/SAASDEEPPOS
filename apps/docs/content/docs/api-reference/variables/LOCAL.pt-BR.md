@@ -3,7 +3,7 @@ layout: docs
 title: "LOCAL"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / LOCAL
+[@saasdeep/fiscal](/docs/api-reference/index) / LOCAL
 
 
 

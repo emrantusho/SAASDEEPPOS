@@ -1,4 +1,4 @@
-# Contributing to FinOpenPOS
+# Contributing to Saasdeep Softwares
 
 Thanks for your interest in contributing! This guide explains how to get involved.
 

@@ -3,7 +3,7 @@ layout: docs
 title: "buildApropriacaoCreditoComb()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildApropriacaoCreditoComb
+[@saasdeep/fiscal](/docs/api-reference/index) / buildApropriacaoCreditoComb
 
 
 

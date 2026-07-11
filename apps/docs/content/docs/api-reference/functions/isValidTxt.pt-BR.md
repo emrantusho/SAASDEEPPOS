@@ -3,7 +3,7 @@ layout: docs
 title: "isValidTxt()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / isValidTxt
+[@saasdeep/fiscal](/docs/api-reference/index) / isValidTxt
 
 
 

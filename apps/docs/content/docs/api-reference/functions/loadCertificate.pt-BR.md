@@ -3,7 +3,7 @@ layout: docs
 title: "loadCertificate()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / loadCertificate
+[@saasdeep/fiscal](/docs/api-reference/index) / loadCertificate
 
 
 

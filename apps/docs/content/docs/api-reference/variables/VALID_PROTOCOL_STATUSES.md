@@ -3,7 +3,7 @@ layout: docs
 title: "VALID\_PROTOCOL\_STATUSES"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / VALID\_PROTOCOL\_STATUSES
+[@saasdeep/fiscal](/docs/api-reference/index) / VALID\_PROTOCOL\_STATUSES
 
 
 

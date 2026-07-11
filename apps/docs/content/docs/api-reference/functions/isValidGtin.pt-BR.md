@@ -3,7 +3,7 @@ layout: docs
 title: "isValidGtin()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / isValidGtin
+[@saasdeep/fiscal](/docs/api-reference/index) / isValidGtin
 
 
 

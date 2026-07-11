@@ -3,7 +3,7 @@ layout: docs
 title: "IiData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / IiData
+[@saasdeep/fiscal](/docs/api-reference/index) / IiData
 
 
 

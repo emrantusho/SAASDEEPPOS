@@ -3,7 +3,7 @@ layout: docs
 title: "validate()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / validate
+[@saasdeep/fiscal](/docs/api-reference/index) / validate
 
 
 

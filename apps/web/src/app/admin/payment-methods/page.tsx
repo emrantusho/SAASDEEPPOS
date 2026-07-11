@@ -3,18 +3,18 @@
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod/v4";
-import { Card, CardContent, CardHeader } from "@finopenpos/ui/components/card";
+import { Card, CardContent, CardHeader } from "@saasdeep/ui/components/card";
 import { PlusCircle, FilePenIcon, TrashIcon, CreditCardIcon } from "lucide-react";
-import { Button } from "@finopenpos/ui/components/button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@finopenpos/ui/components/dialog";
-import { Input } from "@finopenpos/ui/components/input";
-import { Label } from "@finopenpos/ui/components/label";
+import { Button } from "@saasdeep/ui/components/button";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@saasdeep/ui/components/dialog";
+import { Input } from "@saasdeep/ui/components/input";
+import { Label } from "@saasdeep/ui/components/label";
 import { DeleteConfirmationDialog } from "@/components/delete-confirmation-dialog";
-import { Skeleton } from "@finopenpos/ui/components/skeleton";
+import { Skeleton } from "@saasdeep/ui/components/skeleton";
 import { useTRPC } from "@/lib/trpc/client";
 import { useQuery } from "@tanstack/react-query";
 import { useCrudMutation } from "@/hooks/use-crud-mutation";
-import { DataTable, TableActions, TableActionButton, type Column } from "@finopenpos/ui/components/data-table";
+import { DataTable, TableActions, TableActionButton, type Column } from "@saasdeep/ui/components/data-table";
 import type { RouterOutputs } from "@/lib/trpc/router";
 import { useTranslations } from "next-intl";
 

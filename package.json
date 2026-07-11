@@ -1,5 +1,5 @@
 {
-  "name": "finopenpos",
+  "name": "saasdeep",
   "private": true,
   "workspaces": {
     "packages": [
@@ -30,21 +30,21 @@
     "check-types": "turbo check-types",
     "dev:web": "turbo -F web dev",
     "dev:docs": "turbo -F docs dev",
-		"dev:www": "turbo -F @finopenpos/www dev",
-    "db:push": "turbo -F @finopenpos/db db:push",
-    "db:studio": "turbo -F @finopenpos/db db:studio",
-    "db:generate": "turbo -F @finopenpos/db db:generate",
-    "db:migrate": "turbo -F @finopenpos/db db:migrate",
+    "dev:www": "turbo -F @saasdeep/www dev",
+    "db:push": "turbo -F @saasdeep/db db:push",
+    "db:studio": "turbo -F @saasdeep/db db:studio",
+    "db:generate": "turbo -F @saasdeep/db db:generate",
+    "db:migrate": "turbo -F @saasdeep/db db:migrate",
     "check": "biome check --write ."
   },
   "dependencies": {
-    "@finopenpos/env": "workspace:*",
+    "@saasdeep/env": "workspace:*",
     "dotenv": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.0",
-    "@finopenpos/config": "workspace:*",
+    "@saasdeep/config": "workspace:*",
     "@types/node": "^22.13.14",
     "turbo": "^2.8.12",
     "typescript": "^5"

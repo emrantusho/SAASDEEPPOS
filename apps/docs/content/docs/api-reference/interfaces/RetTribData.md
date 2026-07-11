@@ -3,7 +3,7 @@ layout: docs
 title: "RetTribData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / RetTribData
+[@saasdeep/fiscal](/docs/api-reference/index) / RetTribData
 
 
 

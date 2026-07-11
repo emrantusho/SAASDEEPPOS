@@ -30,11 +30,11 @@ const { provider } = defineI18nUI(i18n, {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | FinOpenPOS Docs",
-    default: "FinOpenPOS Docs",
+    template: "%s | Saasdeep Softwares Docs",
+    default: "Saasdeep Softwares Docs",
   },
   description:
-    "Documentation for FinOpenPOS — open-source point of sale system",
+    "Documentation for Saasdeep Softwares — point of sale system",
 };
 
 interface LayoutProps {

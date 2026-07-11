@@ -1,0 +1,7 @@
+{
+  "project": "saasdeep-store",
+  "buildCommand": "cd ../.. && bun install && cd apps/storefront && bun run build",
+  "outputDirectory": ".next",
+  "installCommand": "bun install",
+  "framework": "nextjs"
+}

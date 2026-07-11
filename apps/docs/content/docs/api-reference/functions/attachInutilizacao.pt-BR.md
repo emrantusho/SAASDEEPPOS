@@ -3,7 +3,7 @@ layout: docs
 title: "attachInutilizacao()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / attachInutilizacao
+[@saasdeep/fiscal](/docs/api-reference/index) / attachInutilizacao
 
 
 

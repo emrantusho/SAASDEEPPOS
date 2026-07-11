@@ -3,7 +3,7 @@ layout: docs
 title: "signEventXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / signEventXml
+[@saasdeep/fiscal](/docs/api-reference/index) / signEventXml
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "requiredField()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / requiredField
+[@saasdeep/fiscal](/docs/api-reference/index) / requiredField
 
 
 

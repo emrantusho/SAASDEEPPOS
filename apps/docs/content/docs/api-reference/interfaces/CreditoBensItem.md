@@ -3,7 +3,7 @@ layout: docs
 title: "CreditoBensItem"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / CreditoBensItem
+[@saasdeep/fiscal](/docs/api-reference/index) / CreditoBensItem
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "attachB2bTag()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / attachB2bTag
+[@saasdeep/fiscal](/docs/api-reference/index) / attachB2bTag
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "FiscalConfig"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / FiscalConfig
+[@saasdeep/fiscal](/docs/api-reference/index) / FiscalConfig
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "buildImpostoDevol()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildImpostoDevol
+[@saasdeep/fiscal](/docs/api-reference/index) / buildImpostoDevol
 
 
 

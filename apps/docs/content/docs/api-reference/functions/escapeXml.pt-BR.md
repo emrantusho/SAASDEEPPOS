@@ -3,7 +3,7 @@ layout: docs
 title: "escapeXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / escapeXml
+[@saasdeep/fiscal](/docs/api-reference/index) / escapeXml
 
 
 

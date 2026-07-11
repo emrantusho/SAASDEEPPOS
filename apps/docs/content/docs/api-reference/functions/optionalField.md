@@ -3,7 +3,7 @@ layout: docs
 title: "optionalField()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / optionalField
+[@saasdeep/fiscal](/docs/api-reference/index) / optionalField
 
 
 

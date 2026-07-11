@@ -3,7 +3,7 @@ layout: docs
 title: "SefazService"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / SefazService
+[@saasdeep/fiscal](/docs/api-reference/index) / SefazService
 
 
 

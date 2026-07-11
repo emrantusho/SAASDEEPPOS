@@ -3,7 +3,7 @@ layout: docs
 title: "buildDeliveryFailureXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildDeliveryFailureXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildDeliveryFailureXml
 
 
 

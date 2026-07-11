@@ -5,7 +5,7 @@ description: System architecture and request flow
 
 ## Overview
 
-FinOpenPOS follows a layered architecture with clear boundaries between the browser, API, authentication, database and fiscal modules.
+Saasdeep Softwares follows a layered architecture with clear boundaries between the browser, API, authentication, database and fiscal modules.
 
 ```mermaid
 flowchart LR
@@ -16,7 +16,7 @@ flowchart LR
   Drizzle["Drizzle ORM"]
   PGLite["PGLite\n(PostgreSQL WASM)"]
   Scalar["Scalar\n/api/docs"]
-  Fiscal["@finopenpos/fiscal\n(NF-e / NFC-e)"]
+  Fiscal["@saasdeep/fiscal\n(NF-e / NFC-e)"]
   SEFAZ["SEFAZ\n(tax authority)"]
 
   Browser -->|HTTP request| Proxy
@@ -37,7 +37,7 @@ flowchart LR
 2. **proxy.ts** (Next.js 16 proxy, replaces `middleware.ts`) checks for a valid session cookie
 3. Authenticated requests are routed to **tRPC v11** procedures
 4. Auth requests (`/api/auth/*`) are handled by **Better Auth**
-5. tRPC procedures use **Drizzle ORM** for database access and **@finopenpos/fiscal** for fiscal operations
+5. tRPC procedures use **Drizzle ORM** for database access and **@saasdeep/fiscal** for fiscal operations
 6. The fiscal module builds XML, signs it with the A1 certificate, and communicates with **SEFAZ** via mTLS (curl)
 7. All data is stored in **PGLite** (PostgreSQL via WASM) — no external database required
 
@@ -54,5 +54,5 @@ All business and fiscal tables include a `user_uid` column. Every query filters 
 | tRPC over REST | End-to-end type safety, no code generation needed |
 | curl over node:https | Bun's `node:https` Agent doesn't support PFX for mTLS |
 | openssl over native PKCS#12 | Bun can't handle native PKCS#12 parsing (RC2-40 cipher) |
-| Standalone fiscal package | `@finopenpos/fiscal` has zero database deps, reusable in any TS project |
+| Standalone fiscal package | `@saasdeep/fiscal` has zero database deps, reusable in any TS project |
 | Integer cents for money | Avoids floating-point precision issues (`4999` = R$49.99) |

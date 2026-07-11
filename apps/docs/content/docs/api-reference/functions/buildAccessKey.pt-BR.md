@@ -3,7 +3,7 @@ layout: docs
 title: "buildAccessKey()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildAccessKey
+[@saasdeep/fiscal](/docs/api-reference/index) / buildAccessKey
 
 
 

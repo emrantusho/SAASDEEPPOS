@@ -3,7 +3,7 @@ layout: docs
 title: "ContingencyType"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / ContingencyType
+[@saasdeep/fiscal](/docs/api-reference/index) / ContingencyType
 
 
 

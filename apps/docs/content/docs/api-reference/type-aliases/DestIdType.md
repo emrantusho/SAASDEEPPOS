@@ -3,7 +3,7 @@ layout: docs
 title: "DestIdType"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / DestIdType
+[@saasdeep/fiscal](/docs/api-reference/index) / DestIdType
 
 
 

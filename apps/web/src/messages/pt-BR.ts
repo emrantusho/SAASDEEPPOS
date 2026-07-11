@@ -49,6 +49,7 @@ const messages: Messages = {
     pos: "Ponto de Venda",
     fiscal: "Fiscal",
     fiscalSettings: "Configurações Fiscais",
+    storefront: "Vitrine",
     invoices: "Notas Fiscais",
     adminPanel: "Painel Admin",
     openMenu: "Abrir menu",

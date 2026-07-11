@@ -1,11 +1,11 @@
 "use client";
 
 import { signup } from "./actions";
-import { Card, CardContent, CardFooter } from "@finopenpos/ui/components/card";
-import { Label } from "@finopenpos/ui/components/label";
-import { Input } from "@finopenpos/ui/components/input";
+import { Card, CardContent, CardFooter } from "@saasdeep/ui/components/card";
+import { Label } from "@saasdeep/ui/components/label";
+import { Input } from "@saasdeep/ui/components/input";
 import Link from "next/link";
-import { Button } from "@finopenpos/ui/components/button";
+import { Button } from "@saasdeep/ui/components/button";
 import { MountainIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "@/components/locale-switcher";

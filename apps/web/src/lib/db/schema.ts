@@ -1,1 +1,1 @@
-export * from "@finopenpos/db/schema";
+export * from "@saasdeep/db/schema";

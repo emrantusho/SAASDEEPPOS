@@ -3,7 +3,7 @@ layout: docs
 title: "buildCadastroQueryXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildCadastroQueryXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildCadastroQueryXml
 
 
 

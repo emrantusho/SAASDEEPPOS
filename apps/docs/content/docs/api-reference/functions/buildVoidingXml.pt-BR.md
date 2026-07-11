@@ -3,7 +3,7 @@ layout: docs
 title: "buildVoidingXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildVoidingXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildVoidingXml
 
 
 

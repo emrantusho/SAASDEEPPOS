@@ -3,7 +3,7 @@ layout: docs
 title: "getStructureByVersionString()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / getStructureByVersionString
+[@saasdeep/fiscal](/docs/api-reference/index) / getStructureByVersionString
 
 
 

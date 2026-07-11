@@ -3,7 +3,7 @@ layout: docs
 title: "QrCodeVersion"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / QrCodeVersion
+[@saasdeep/fiscal](/docs/api-reference/index) / QrCodeVersion
 
 
 

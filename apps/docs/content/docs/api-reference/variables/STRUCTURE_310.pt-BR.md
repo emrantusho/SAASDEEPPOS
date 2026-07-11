@@ -3,7 +3,7 @@ layout: docs
 title: "STRUCTURE\_310"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / STRUCTURE\_310
+[@saasdeep/fiscal](/docs/api-reference/index) / STRUCTURE\_310
 
 
 

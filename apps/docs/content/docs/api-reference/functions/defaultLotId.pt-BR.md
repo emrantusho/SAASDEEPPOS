@@ -3,7 +3,7 @@ layout: docs
 title: "defaultLotId()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / defaultLotId
+[@saasdeep/fiscal](/docs/api-reference/index) / defaultLotId
 
 
 

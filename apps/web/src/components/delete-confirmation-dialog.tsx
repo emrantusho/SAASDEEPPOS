@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Button } from "@finopenpos/ui/components/button";
+import { Button } from "@saasdeep/ui/components/button";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@finopenpos/ui/components/dialog";
+} from "@saasdeep/ui/components/dialog";
 
 interface DeleteConfirmationDialogProps {
   open: boolean;

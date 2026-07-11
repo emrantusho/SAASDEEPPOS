@@ -3,7 +3,7 @@ layout: docs
 title: "calculateCofinsSt()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / calculateCofinsSt
+[@saasdeep/fiscal](/docs/api-reference/index) / calculateCofinsSt
 
 
 

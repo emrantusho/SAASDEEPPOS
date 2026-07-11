@@ -5,7 +5,7 @@ description: Monorepo layout and package organization
 
 ## Monorepo Overview
 
-FinOpenPOS is organized as a **Turborepo** monorepo with apps and shared packages.
+Saasdeep Softwares is organized as a **Turborepo** monorepo with apps and shared packages.
 
 ```mermaid
 flowchart TB
@@ -16,7 +16,7 @@ flowchart TB
   end
 
   subgraph Packages["packages/"]
-    Fiscal["fiscal\n@finopenpos/fiscal"]
+    Fiscal["fiscal\n@saasdeep/fiscal"]
     UI["ui\nShared components"]
     DB["db\nDrizzle schema"]
     AuthPkg["auth\nBetter Auth factory"]
@@ -35,7 +35,7 @@ flowchart TB
 ## Directory Layout
 
 ```
-FinOpenPOS/
+Saasdeep Softwares/
 ├── apps/
 │   ├── web/                        # Next.js 16 web application
 │   │   ├── src/
@@ -54,7 +54,7 @@ FinOpenPOS/
 │   ├── docs/                       # This documentation site (Fumadocs)
 │   └── www/                        # Landing page
 ├── packages/
-│   └── fiscal/                     # @finopenpos/fiscal — standalone
+│   └── fiscal/                     # @saasdeep/fiscal — standalone
 │       └── src/
 │           ├── __tests__/          # 754 tests (ported from PHP sped-nfe)
 │           ├── value-objects/       # AccessKey, TaxId
@@ -78,12 +78,12 @@ FinOpenPOS/
 | `apps/web` | — | Main Next.js 16 application with POS, dashboard, and fiscal UI |
 | `apps/docs` | — | Documentation site built with Fumadocs |
 | `apps/www` | — | Landing page |
-| `packages/fiscal` | `@finopenpos/fiscal` | Standalone Brazilian fiscal library (NF-e/NFC-e), zero database deps |
-| `packages/ui` | `@finopenpos/ui` | Shared UI components (shadcn/Radix-based) |
-| `packages/db` | `@finopenpos/db` | Drizzle ORM schema and database configuration |
-| `packages/auth` | `@finopenpos/auth` | Better Auth factory and configuration |
-| `packages/api` | `@finopenpos/api` | tRPC router infrastructure |
-| `packages/env` | `@finopenpos/env` | Environment variable validation (t3-oss/env) |
+| `packages/fiscal` | `@saasdeep/fiscal` | Standalone Brazilian fiscal library (NF-e/NFC-e), zero database deps |
+| `packages/ui` | `@saasdeep/ui` | Shared UI components (shadcn/Radix-based) |
+| `packages/db` | `@saasdeep/db` | Drizzle ORM schema and database configuration |
+| `packages/auth` | `@saasdeep/auth` | Better Auth factory and configuration |
+| `packages/api` | `@saasdeep/api` | tRPC router infrastructure |
+| `packages/env` | `@saasdeep/env` | Environment variable validation (t3-oss/env) |
 
 ## Turborepo Tasks
 

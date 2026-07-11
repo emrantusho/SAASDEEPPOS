@@ -3,7 +3,7 @@ layout: docs
 title: "toJson()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / toJson
+[@saasdeep/fiscal](/docs/api-reference/index) / toJson
 
 
 

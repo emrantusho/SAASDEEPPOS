@@ -3,7 +3,7 @@ layout: docs
 title: "InvoiceModel"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / InvoiceModel
+[@saasdeep/fiscal](/docs/api-reference/index) / InvoiceModel
 
 
 

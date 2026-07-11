@@ -3,7 +3,7 @@ layout: docs
 title: "NFE\_NAMESPACE"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / NFE\_NAMESPACE
+[@saasdeep/fiscal](/docs/api-reference/index) / NFE\_NAMESPACE
 
 
 

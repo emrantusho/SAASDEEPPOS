@@ -3,7 +3,7 @@ layout: docs
 title: "whichIs()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / whichIs
+[@saasdeep/fiscal](/docs/api-reference/index) / whichIs
 
 
 

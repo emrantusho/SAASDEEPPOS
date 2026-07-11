@@ -3,7 +3,7 @@ layout: docs
 title: "buildCancellationEventXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildCancellationEventXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildCancellationEventXml
 
 
 

@@ -3,7 +3,7 @@ layout: docs
 title: "toArray()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / toArray
+[@saasdeep/fiscal](/docs/api-reference/index) / toArray
 
 
 

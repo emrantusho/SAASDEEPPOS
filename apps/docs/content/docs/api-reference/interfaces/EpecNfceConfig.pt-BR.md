@@ -3,7 +3,7 @@ layout: docs
 title: "EpecNfceConfig"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / EpecNfceConfig
+[@saasdeep/fiscal](/docs/api-reference/index) / EpecNfceConfig
 
 
 

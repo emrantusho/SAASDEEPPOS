@@ -3,7 +3,7 @@ layout: docs
 title: "toStd()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / toStd
+[@saasdeep/fiscal](/docs/api-reference/index) / toStd
 
 
 

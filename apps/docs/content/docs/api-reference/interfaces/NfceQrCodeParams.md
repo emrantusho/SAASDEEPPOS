@@ -3,7 +3,7 @@ layout: docs
 title: "NfceQrCodeParams"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / NfceQrCodeParams
+[@saasdeep/fiscal](/docs/api-reference/index) / NfceQrCodeParams
 
 
 

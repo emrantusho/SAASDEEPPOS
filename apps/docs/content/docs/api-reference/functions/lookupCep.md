@@ -3,7 +3,7 @@ layout: docs
 title: "lookupCep()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / lookupCep
+[@saasdeep/fiscal](/docs/api-reference/index) / lookupCep
 
 
 

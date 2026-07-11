@@ -3,7 +3,7 @@ layout: docs
 title: "buildBatchEventXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildBatchEventXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildBatchEventXml
 
 
 

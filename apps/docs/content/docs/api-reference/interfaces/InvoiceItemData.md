@@ -3,7 +3,7 @@ layout: docs
 title: "InvoiceItemData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / InvoiceItemData
+[@saasdeep/fiscal](/docs/api-reference/index) / InvoiceItemData
 
 
 

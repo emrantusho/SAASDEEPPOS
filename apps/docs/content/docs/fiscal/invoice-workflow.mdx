@@ -7,7 +7,7 @@ description: The invoice service orchestrates the complete lifecycle of an elect
 
 The invoice service orchestrates the complete lifecycle of an electronic invoice: from building the XML to sending it to SEFAZ, handling responses, and persisting results. It sits in the application/service layer, coordinating domain logic, infrastructure, and persistence.
 
-These three files are the DB-coupled layer that lives in the app, not in the `@finopenpos/fiscal` package (which has zero database dependencies).
+These three files are the DB-coupled layer that lives in the app, not in the `@saasdeep/fiscal` package (which has zero database dependencies).
 
 **Files**: `apps/web/src/lib/invoice-service.ts`, `apps/web/src/lib/fiscal-settings-repository.ts`, `apps/web/src/lib/invoice-repository.ts`
 

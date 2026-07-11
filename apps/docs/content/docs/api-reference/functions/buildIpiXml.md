@@ -3,7 +3,7 @@ layout: docs
 title: "buildIpiXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildIpiXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildIpiXml
 
 
 

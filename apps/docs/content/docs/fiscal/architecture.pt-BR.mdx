@@ -9,7 +9,7 @@ O módulo fiscal implementa a emissão completa de documentos fiscais eletrônic
 
 ### Estrutura do Monorepo
 
-O projeto utiliza um monorepo Turborepo. A lógica fiscal pura está em um pacote independente (`@finopenpos/fiscal`) em `packages/fiscal/`, sem dependências de banco de dados. Os arquivos acoplados ao banco (repositórios e serviço de notas) ficam na camada da aplicação em `apps/web/src/lib/`.
+O projeto utiliza um monorepo Turborepo. A lógica fiscal pura está em um pacote independente (`@saasdeep/fiscal`) em `packages/fiscal/`, sem dependências de banco de dados. Os arquivos acoplados ao banco (repositórios e serviço de notas) ficam na camada da aplicação em `apps/web/src/lib/`.
 
 - **`packages/fiscal/src/`** — pacote fiscal independente (lógica de domínio, XML, SEFAZ, etc.)
 - **`apps/web/src/lib/`** — arquivos de serviço/repositório acoplados ao banco (invoice-service, invoice-repository, fiscal-settings-repository)
@@ -96,7 +96,7 @@ Todas as tabelas do banco são chaveadas por `user_uid`. Toda função de reposi
 
 ## Índice de Arquivos
 
-Todos os arquivos do pacote **`@finopenpos/fiscal`** ficam em `packages/fiscal/src/`. Os três arquivos acoplados ao banco ficam em `apps/web/src/lib/`.
+Todos os arquivos do pacote **`@saasdeep/fiscal`** ficam em `packages/fiscal/src/`. Os três arquivos acoplados ao banco ficam em `apps/web/src/lib/`.
 
 | Arquivo | Localização | Camada | Propósito |
 |---------|-------------|--------|-----------|

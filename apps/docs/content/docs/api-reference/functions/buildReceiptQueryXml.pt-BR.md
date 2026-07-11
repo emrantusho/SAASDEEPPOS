@@ -3,7 +3,7 @@ layout: docs
 title: "buildReceiptQueryXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildReceiptQueryXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildReceiptQueryXml
 
 
 

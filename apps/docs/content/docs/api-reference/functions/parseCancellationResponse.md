@@ -3,7 +3,7 @@ layout: docs
 title: "parseCancellationResponse()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / parseCancellationResponse
+[@saasdeep/fiscal](/docs/api-reference/index) / parseCancellationResponse
 
 
 

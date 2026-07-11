@@ -3,7 +3,7 @@ layout: docs
 title: "IssqnData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / IssqnData
+[@saasdeep/fiscal](/docs/api-reference/index) / IssqnData
 
 
 

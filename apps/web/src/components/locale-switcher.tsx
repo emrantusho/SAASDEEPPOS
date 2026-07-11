@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@finopenpos/ui/components/select";
+} from "@saasdeep/ui/components/select";
 
 const localeNames: Record<Locale, string> = {
   en: "English",

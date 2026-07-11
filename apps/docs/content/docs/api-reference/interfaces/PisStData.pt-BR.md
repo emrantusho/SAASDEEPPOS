@@ -3,7 +3,7 @@ layout: docs
 title: "PisStData"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / PisStData
+[@saasdeep/fiscal](/docs/api-reference/index) / PisStData
 
 
 

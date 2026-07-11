@@ -3,7 +3,7 @@ layout: docs
 title: "IcmsTotals"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / IcmsTotals
+[@saasdeep/fiscal](/docs/api-reference/index) / IcmsTotals
 
 
 

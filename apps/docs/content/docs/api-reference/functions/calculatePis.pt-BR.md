@@ -3,7 +3,7 @@ layout: docs
 title: "calculatePis()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / calculatePis
+[@saasdeep/fiscal](/docs/api-reference/index) / calculatePis
 
 
 

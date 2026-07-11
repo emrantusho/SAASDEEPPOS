@@ -3,7 +3,7 @@ layout: docs
 title: "buildAuthorizationRequestXml()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / buildAuthorizationRequestXml
+[@saasdeep/fiscal](/docs/api-reference/index) / buildAuthorizationRequestXml
 
 
 

@@ -10,8 +10,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FinOpenPOS",
-  description: "Open-source point of sale system",
+  title: "Saasdeep Softwares",
+  description: "Saasdeep Softwares - Point of Sale System",
 };
 
 export default async function RootLayout({

@@ -3,7 +3,7 @@ layout: docs
 title: "loadStructure()"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / loadStructure
+[@saasdeep/fiscal](/docs/api-reference/index) / loadStructure
 
 
 

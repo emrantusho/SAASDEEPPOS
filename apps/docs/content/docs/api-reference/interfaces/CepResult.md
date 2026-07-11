@@ -3,7 +3,7 @@ layout: docs
 title: "CepResult"
 ---
 
-[@finopenpos/fiscal](/docs/api-reference/index) / CepResult
+[@saasdeep/fiscal](/docs/api-reference/index) / CepResult
 
 
 
