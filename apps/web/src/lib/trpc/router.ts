@@ -10,6 +10,10 @@ import { fiscalSettingsRouter } from "./routers/fiscal-settings";
 import { fiscalRouter } from "./routers/fiscal";
 import { citiesRouter } from "./routers/cities";
 import { storeSettingsRouter } from "./routers/store-settings";
+import { tablesRouter } from "./routers/tables";
+import { couponsRouter } from "./routers/coupons";
+import { kitchenRouter } from "./routers/kitchen";
+import { loyaltyRouter } from "./routers/loyalty";
 
 export const appRouter = router({
   products: productsRouter,
@@ -22,6 +26,10 @@ export const appRouter = router({
   fiscal: fiscalRouter,
   cities: citiesRouter,
   storeSettings: storeSettingsRouter,
+  tables: tablesRouter,
+  coupons: couponsRouter,
+  kitchen: kitchenRouter,
+  loyalty: loyaltyRouter,
 });
 
 export type AppRouter = typeof appRouter;

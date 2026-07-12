@@ -403,6 +403,10 @@ erDiagram
         varchar phone
         varchar user_uid
         varchar status
+        varchar otp
+        timestamp otp_expires_at
+        integer loyalty_points
+        boolean whatsapp_optin
         timestamp created_at
     }
 
@@ -422,7 +426,10 @@ erDiagram
         varchar customer_phone
         varchar customer_name
         varchar table_number
+        integer table_id
         text delivery_address
+        integer coupon_id
+        integer discount_amount
         text notes
         timestamp created_at
     }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { CartProvider } from "@/components/cart/cart-context";
+import { CustomerAuthProvider } from "@/components/auth/auth-context";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { LocaleProvider } from "@/lib/use-locale";
@@ -92,12 +93,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} className={GeistSans.className} style={themeVars}>
       <body className="min-h-screen bg-background text-foreground antialiased flex flex-col">
         <LocaleProvider locale={locale}>
-          <CartProvider currency={currency}>
-            <Navbar logoUrl={logoUrl} storeName={storeName} />
-            <main className="flex-1">{children}</main>
-            <Footer storeName={storeName} footerText={footerText} />
-            <Toaster position="top-right" richColors />
-          </CartProvider>
+          <CustomerAuthProvider>
+            <CartProvider currency={currency}>
+              <Navbar logoUrl={logoUrl} storeName={storeName} />
+              <main className="flex-1">{children}</main>
+              <Footer storeName={storeName} footerText={footerText} />
+              <Toaster position="top-right" richColors />
+            </CartProvider>
+          </CustomerAuthProvider>
         </LocaleProvider>
       </body>
     </html>

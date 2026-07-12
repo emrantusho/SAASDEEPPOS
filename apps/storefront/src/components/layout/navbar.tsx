@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, User, LogOut } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart/cart-context";
+import { useCustomerAuth } from "@/components/auth/auth-context";
 import { useT } from "@/lib/use-locale";
+import { VoiceSearch } from "@/components/ui/voice-search";
+import { BarcodeScanner } from "@/components/ui/barcode-scanner";
 
 export function Navbar({ logoUrl, storeName }: { logoUrl?: string; storeName?: string }) {
   const router = useRouter();
   const { itemCount } = useCart();
+  const { isLoggedIn, customer, logout } = useCustomerAuth();
   const t = useT();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,6 +23,14 @@ export function Navbar({ logoUrl, storeName }: { logoUrl?: string; storeName?: s
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
+  };
+
+  const handleVoiceResult = (query: string) => {
+    router.push(`/search?q=${encodeURIComponent(query)}`);
+  };
+
+  const handleBarcodeScan = (barcode: string) => {
+    router.push(`/search?q=${encodeURIComponent(barcode)}`);
   };
 
   return (
@@ -41,7 +53,7 @@ export function Navbar({ logoUrl, storeName }: { logoUrl?: string; storeName?: s
             {t.nav.trackOrder}
           </Link>
 
-          <form onSubmit={handleSearch} className="relative">
+          <form onSubmit={handleSearch} className="relative flex items-center">
             <input
               type="text"
               value={searchQuery}
@@ -50,7 +62,32 @@ export function Navbar({ logoUrl, storeName }: { logoUrl?: string; storeName?: s
               className="w-48 rounded-lg border border-input bg-background px-3 py-1.5 pl-8 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+            <VoiceSearch onResult={handleVoiceResult} />
+            <BarcodeScanner onScan={handleBarcodeScan} />
           </form>
+
+          {isLoggedIn ? (
+            <div className="relative group">
+              <button className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <User className="h-4 w-4" />
+                <span className="max-w-[100px] truncate">{customer?.name || customer?.phone}</span>
+              </button>
+              <div className="absolute right-0 top-full mt-1 w-40 rounded-lg border border-border bg-card p-1 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <button
+                  onClick={() => { logout(); }}
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-muted"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+              <User className="h-4 w-4" />
+              Login
+            </Link>
+          )}
 
           <Link href="/cart" className="relative text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ShoppingBag className="h-5 w-5" />
@@ -70,18 +107,30 @@ export function Navbar({ logoUrl, storeName }: { logoUrl?: string; storeName?: s
       {mobileOpen && (
         <div className="border-t border-border bg-background md:hidden">
           <div className="space-y-1 px-4 py-3">
-            <form onSubmit={handleSearch} className="relative mb-2">
+            <form onSubmit={handleSearch} className="relative mb-2 flex items-center">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t.store.searchProducts}
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 pl-8 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 pl-8 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               />
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <div className="absolute right-1 top-1/2 -translate-y-1/2 flex">
+                <VoiceSearch onResult={handleVoiceResult} />
+                <BarcodeScanner onScan={handleBarcodeScan} />
+              </div>
             </form>
             <Link href="/search" className="block py-2 text-sm text-muted-foreground hover:text-foreground">{t.nav.products}</Link>
             <Link href="/order" className="block py-2 text-sm text-muted-foreground hover:text-foreground">{t.nav.trackOrder}</Link>
+            {isLoggedIn ? (
+              <div className="flex items-center justify-between py-2">
+                <span className="text-sm text-muted-foreground">{customer?.name || customer?.phone}</span>
+                <button onClick={logout} className="text-xs text-muted-foreground hover:text-foreground">Logout</button>
+              </div>
+            ) : (
+              <Link href="/login" className="block py-2 text-sm text-muted-foreground hover:text-foreground">Login</Link>
+            )}
             <Link href="/cart" className="block py-2 text-sm text-muted-foreground hover:text-foreground">{t.nav.cart} ({itemCount})</Link>
           </div>
         </div>

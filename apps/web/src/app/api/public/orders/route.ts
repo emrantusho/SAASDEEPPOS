@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { orders, orderItems, transactions, paymentMethods } from "@/lib/db/schema";
+import { orders, orderItems, transactions, paymentMethods, customers } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { sendOrderConfirmation } from "@/lib/whatsapp";
+import { getSmsProvider } from "@/lib/sms";
 
 export const dynamic = "force-dynamic";
 
@@ -71,6 +73,32 @@ export async function POST(request: Request) {
 
       return order;
     });
+
+    const itemDetails = items.map((i: { productId: number; quantity: number; price: number }) => ({
+      name: `Product #${i.productId}`,
+      quantity: i.quantity,
+      price: Math.round(i.price * 100),
+    }));
+
+    if (customerPhone) {
+      sendOrderConfirmation(customerPhone, result.id, itemDetails, result.total_amount).catch(console.error);
+    }
+
+    const customer = customerPhone
+      ? await db.query.customers.findFirst({
+          where: eq(customers.phone, customerPhone),
+        })
+      : null;
+
+    if (customer?.whatsapp_optin && customer.phone) {
+      sendOrderConfirmation(customer.phone, result.id, itemDetails, result.total_amount).catch(console.error);
+    }
+
+    if (customerPhone) {
+      const sms = getSmsProvider();
+      const itemSummary = itemDetails.slice(0, 3).map((i: { name: string; quantity: number }) => `${i.name} x${i.quantity}`).join(", ");
+      sms.send(customerPhone, `SaasDeep - Order #${result.id} confirmed!\nItems: ${itemSummary}\nTotal: ৳${(result.total_amount / 100).toFixed(2)}`).catch(console.error);
+    }
 
     return NextResponse.json({
       success: true,

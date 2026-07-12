@@ -3,11 +3,13 @@
 import { useCart } from "@/components/cart/cart-context";
 import { useState } from "react";
 import Link from "next/link";
-import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
+import { Trash2, Minus, Plus, ShoppingBag, Users } from "lucide-react";
 import { formatPrice } from "@/lib/currency";
 import { useT } from "@/lib/use-locale";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { validateBDPhone } from "@/lib/phone-utils";
+import { AddressSelect } from "@/components/ui/address-select";
 
 export default function CartPage() {
   const { cart, itemCount, total, updateQuantity, removeItem, clearCart, checkout } = useCart();
@@ -20,11 +22,21 @@ export default function CartPage() {
   const [orderType, setOrderType] = useState("delivery");
   const [processing, setProcessing] = useState(false);
   const [currency, setCurrency] = useState("BDT");
+  const [showSplit, setShowSplit] = useState(false);
+  const [splitMode, setSplitMode] = useState<"equal" | "custom">("equal");
+  const [splitPeople, setSplitPeople] = useState(2);
+  const [splitAmounts, setSplitAmounts] = useState<number[]>([]);
+
+  const phoneValidation = customerPhone ? validateBDPhone(customerPhone) : null;
 
   const handleCheckout = async () => {
     if (cart.length === 0) return;
     if (!customerPhone) {
       toast.error("Please enter your phone number");
+      return;
+    }
+    if (phoneValidation && !phoneValidation.valid) {
+      toast.error(phoneValidation.error || "Invalid phone number");
       return;
     }
     setProcessing(true);
@@ -42,6 +54,29 @@ export default function CartPage() {
     } finally {
       setProcessing(false);
     }
+  };
+
+  const handleSplitEqual = () => {
+    const perPerson = Math.floor(total / splitPeople);
+    setSplitAmounts(Array(splitPeople).fill(perPerson));
+    setSplitMode("equal");
+  };
+
+  const handleSplitCustom = () => {
+    const remaining = total;
+    const amounts = Array(splitPeople).fill(0).map((_, i) => {
+      if (i === splitPeople - 1) return remaining;
+      const amt = Math.floor(remaining / (splitPeople - i));
+      return amt;
+    });
+    setSplitAmounts(amounts);
+    setSplitMode("custom");
+  };
+
+  const updateSplitAmount = (index: number, value: number) => {
+    const newAmounts = [...splitAmounts];
+    newAmounts[index] = value;
+    setSplitAmounts(newAmounts);
   };
 
   if (cart.length === 0) {
@@ -119,14 +154,25 @@ export default function CartPage() {
         <div className="space-y-4 mb-4">
           <div>
             <label className="text-sm font-medium text-foreground block mb-1">Phone Number *</label>
-            <input
-              type="tel"
-              value={customerPhone}
-              onChange={(e) => setCustomerPhone(e.target.value)}
-              placeholder="01XXXXXXXXX"
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
-              required
-            />
+            <div className="relative">
+              <input
+                type="tel"
+                value={customerPhone}
+                onChange={(e) => setCustomerPhone(e.target.value)}
+                placeholder="01XXXXXXXXX"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm pr-24 focus:outline-none focus:ring-2 focus:ring-ring"
+                required
+              />
+              {phoneValidation && (
+                <span className={`absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-medium px-1.5 py-0.5 rounded ${
+                  phoneValidation.valid
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}>
+                  {phoneValidation.valid ? phoneValidation.operator : phoneValidation.error}
+                </span>
+              )}
+            </div>
           </div>
 
           <div>
@@ -136,7 +182,7 @@ export default function CartPage() {
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Your name"
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
@@ -145,7 +191,7 @@ export default function CartPage() {
             <select
               value={orderType}
               onChange={(e) => setOrderType(e.target.value)}
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             >
               <option value="delivery">Delivery</option>
               <option value="pickup">Pickup</option>
@@ -156,15 +202,82 @@ export default function CartPage() {
           {orderType === "delivery" && (
             <div>
               <label className="text-sm font-medium text-foreground block mb-1">Delivery Address</label>
-              <textarea
-                value={deliveryAddress}
-                onChange={(e) => setDeliveryAddress(e.target.value)}
-                placeholder="Your full address"
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
-                rows={2}
-              />
+              <AddressSelect value={deliveryAddress} onChange={setDeliveryAddress} />
             </div>
           )}
+
+          <div className="border-t border-border pt-4">
+            <button
+              type="button"
+              onClick={() => setShowSplit(!showSplit)}
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+            >
+              <Users className="h-4 w-4" />
+              {showSplit ? "Hide Split Bill" : "Split with friends"}
+            </button>
+
+            {showSplit && (
+              <div className="mt-3 space-y-3">
+                <div className="flex items-center gap-2">
+                  <label className="text-xs text-muted-foreground">Number of people:</label>
+                  <input
+                    type="number"
+                    min={2}
+                    max={20}
+                    value={splitPeople}
+                    onChange={(e) => setSplitPeople(Number(e.target.value))}
+                    className="w-16 rounded border border-input bg-background px-2 py-1 text-xs text-center"
+                  />
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleSplitEqual}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                      splitMode === "equal"
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background text-foreground border-border hover:bg-muted"
+                    }`}
+                  >
+                    Equal Split
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSplitCustom}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                      splitMode === "custom"
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background text-foreground border-border hover:bg-muted"
+                    }`}
+                  >
+                    Custom
+                  </button>
+                </div>
+
+                {splitAmounts.length > 0 && (
+                  <div className="space-y-2">
+                    {splitAmounts.map((amt, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <span className="text-xs text-muted-foreground w-16">Person {i + 1}</span>
+                        <input
+                          type="number"
+                          value={amt}
+                          onChange={(e) => updateSplitAmount(i, Number(e.target.value))}
+                          className="flex-1 rounded border border-input bg-background px-2 py-1 text-xs"
+                          disabled={splitMode === "equal"}
+                        />
+                        <span className="text-xs font-medium text-primary">{formatPrice(amt, currency)}</span>
+                      </div>
+                    ))}
+                    <div className="text-xs text-muted-foreground pt-1">
+                      Total: {formatPrice(splitAmounts.reduce((s, a) => s + a, 0), currency)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           <div>
             <label className="text-sm font-medium text-foreground block mb-2">{t.cart.paymentMethod}</label>

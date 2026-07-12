@@ -33,6 +33,9 @@ import {
   ReceiptTextIcon,
   SettingsIcon,
   StoreIcon,
+  TableIcon,
+  TicketIcon,
+  ChefHatIcon,
   type LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -42,7 +45,7 @@ import { logout } from "@/app/login/actions";
 
 interface NavItem {
   href: string;
-  labelKey: "dashboard" | "cashier" | "products" | "customers" | "orders" | "paymentMethods" | "pos" | "invoices" | "fiscalSettings" | "storefront";
+  labelKey: "dashboard" | "cashier" | "products" | "customers" | "orders" | "paymentMethods" | "pos" | "invoices" | "fiscalSettings" | "storefront" | "tables" | "coupons" | "kitchen";
   icon: LucideIcon;
 }
 
@@ -54,6 +57,9 @@ const navItems: NavItem[] = [
   { href: "/admin/orders", labelKey: "orders", icon: ShoppingBagIcon },
   { href: "/admin/payment-methods", labelKey: "paymentMethods", icon: CreditCardIcon },
   { href: "/admin/pos", labelKey: "pos", icon: ShoppingCartIcon },
+  { href: "/admin/tables", labelKey: "tables", icon: TableIcon },
+  { href: "/admin/coupons", labelKey: "coupons", icon: TicketIcon },
+  { href: "/admin/kitchen", labelKey: "kitchen", icon: ChefHatIcon },
   { href: "/admin/fiscal", labelKey: "invoices", icon: ReceiptTextIcon },
   { href: "/admin/fiscal/settings", labelKey: "fiscalSettings", icon: SettingsIcon },
   { href: "/admin/storefront", labelKey: "storefront", icon: StoreIcon },

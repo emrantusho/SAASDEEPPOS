@@ -60,6 +60,10 @@ export const customers = pgTable("customers", {
   phone: varchar("phone", { length: 20 }),
   user_uid: varchar("user_uid", { length: 255 }).notNull(),
   status: varchar("status", { length: 20 }),
+  otp: varchar("otp", { length: 6 }),
+  otp_expires_at: timestamp("otp_expires_at"),
+  loyalty_points: integer("loyalty_points").default(0),
+  whatsapp_optin: boolean("whatsapp_optin").default(false),
   created_at: timestamp("created_at").defaultNow(),
 });
 
@@ -74,7 +78,10 @@ export const orders = pgTable("orders", {
   customer_phone: varchar("customer_phone", { length: 20 }),
   customer_name: varchar("customer_name", { length: 255 }),
   table_number: varchar("table_number", { length: 10 }),
+  table_id: integer("table_id"),
   delivery_address: text("delivery_address"),
+  coupon_id: integer("coupon_id"),
+  discount_amount: integer("discount_amount").default(0),
   notes: text("notes"),
   created_at: timestamp("created_at").defaultNow(),
 });
@@ -143,6 +150,64 @@ export const storeSettings = pgTable("store_settings", {
   free_delivery_min: integer("free_delivery_min").default(0),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
+});
+
+// ── Tables (Floor Plan) ─────────────────────────────────────────────────────
+export const tables = pgTable("tables", {
+  id: serial("id").primaryKey(),
+  user_uid: varchar("user_uid", { length: 255 }).notNull(),
+  number: varchar("number", { length: 10 }).notNull(),
+  capacity: integer("capacity").default(4),
+  status: varchar("status", { length: 20 }).default("free"),
+  location: varchar("location", { length: 100 }),
+  qr_code: text("qr_code"),
+  created_at: timestamp("created_at").defaultNow(),
+});
+
+// ── Coupons ─────────────────────────────────────────────────────────────────
+export const coupons = pgTable("coupons", {
+  id: serial("id").primaryKey(),
+  user_uid: varchar("user_uid", { length: 255 }).notNull(),
+  code: varchar("code", { length: 50 }).notNull(),
+  type: varchar("type", { length: 20 }).notNull(), // percentage | fixed
+  value: integer("value").notNull(),
+  min_amount: integer("min_amount").default(0),
+  max_uses: integer("max_uses").default(0),
+  used_count: integer("used_count").default(0),
+  expires_at: timestamp("expires_at"),
+  active: boolean("active").default(true),
+  created_at: timestamp("created_at").defaultNow(),
+});
+
+// ── Push Subscriptions ──────────────────────────────────────────────────────
+export const pushSubscriptions = pgTable("push_subscriptions", {
+  id: serial("id").primaryKey(),
+  user_uid: varchar("user_uid", { length: 255 }).notNull(),
+  endpoint: text("endpoint").notNull(),
+  p256dh: varchar("p256dh", { length: 255 }).notNull(),
+  auth: varchar("auth", { length: 255 }).notNull(),
+  created_at: timestamp("created_at").defaultNow(),
+});
+
+// ── Bangladesh Address Data ─────────────────────────────────────────────────
+export const bdDivisions = pgTable("bd_divisions", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  name_bn: varchar("name_bn", { length: 100 }),
+});
+
+export const bdDistricts = pgTable("bd_districts", {
+  id: serial("id").primaryKey(),
+  division_id: integer("division_id").notNull(),
+  name: varchar("name", { length: 100 }).notNull(),
+  name_bn: varchar("name_bn", { length: 100 }),
+});
+
+export const bdUpazilas = pgTable("bd_upazilas", {
+  id: serial("id").primaryKey(),
+  district_id: integer("district_id").notNull(),
+  name: varchar("name", { length: 100 }).notNull(),
+  name_bn: varchar("name_bn", { length: 100 }),
 });
 
 // ── Cities (IBGE) ──────────────────────────────────────────────────────────
@@ -310,6 +375,9 @@ export const productsRelations = relations(products, ({ many }) => ({
 export const categoriesRelations = relations(categories, () => ({}));
 
 export const storeSettingsRelations = relations(storeSettings, () => ({}));
+export const tablesRelations = relations(tables, () => ({}));
+export const couponsRelations = relations(coupons, () => ({}));
+export const pushSubscriptionsRelations = relations(pushSubscriptions, () => ({}));
 
 export const paymentMethodsRelations = relations(paymentMethods, ({ many }) => ({
   transactions: many(transactions),
